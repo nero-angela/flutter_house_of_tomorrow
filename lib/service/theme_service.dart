@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:tomorrow_house/view/theme/core/app_theme.dart';
 import 'package:tomorrow_house/view/theme/dark_theme.dart';
 import 'package:tomorrow_house/view/theme/light_theme.dart';
@@ -20,4 +21,33 @@ class ThemeService with ChangeNotifier {
     }
     notifyListeners();
   }
+
+  /// Material ThemeData 커스텀
+  ThemeData get themeData {
+    return ThemeData(
+      /// Scaffold
+      scaffoldBackgroundColor: theme.color.surface,
+
+      /// AppBar
+      appBarTheme: AppBarTheme(
+        backgroundColor: theme.color.surface,
+        elevation: 0,
+        centerTitle: false,
+        iconTheme: IconThemeData(
+          color: theme.color.text,
+        ),
+        titleTextStyle: theme.font.headline2.copyWith(
+          color: theme.color.text,
+        ),
+      ),
+    );
+  }
+}
+
+/// context를 이용해 바로 접근
+extension BuildContextExt on BuildContext {
+  AppTheme get theme => watch<ThemeService>().theme;
+  AppColor get color => theme.color;
+  AppDeco get deco => theme.deco;
+  AppFont get font => theme.font;
 }

@@ -7,26 +7,20 @@ class ShoppingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final themeService = context.watch<ThemeService>();
-    final theme = themeService.theme;
     return Scaffold(
-      backgroundColor: theme.color.surface,
       appBar: AppBar(
-        elevation: 0,
-        backgroundColor: theme.color.surface,
-        centerTitle: false,
         title: Text(
           'Shopping',
-          style: theme.font.headline2,
+          style: context.font.headline2,
         ),
         actions: [
           IconButton(
             onPressed: () {
-              themeService.toggleTheme();
+              context.read<ThemeService>().toggleTheme();
             },
             icon: Icon(
               Icons.dark_mode,
-              color: theme.color.primary,
+              color: context.color.primary,
             ),
           ),
         ],
