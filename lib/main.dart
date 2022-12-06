@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tomorrow_house/service/theme_service.dart';
+import 'package:tomorrow_house/view/page/shopping/shopping_page.dart';
 import 'package:tomorrow_house/view/theme/light_theme.dart';
 
 void main() {
@@ -25,11 +26,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: Center(
-          child: Text("Hello Tomorrow House"),
-        ),
-      ),
+      home: ShoppingPage(),
     );
   }
 }
