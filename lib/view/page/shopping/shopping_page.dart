@@ -10,6 +10,7 @@ import 'package:tomorrow_house/view/lang/generated/l10n.dart';
 import 'package:tomorrow_house/view/page/shopping/widget/product_card.dart';
 import 'package:tomorrow_house/view/page/shopping/widget/setting_bottom_sheet.dart';
 import 'package:tomorrow_house/view/theme/component/button.dart';
+import 'package:tomorrow_house/view/theme/component/hide_keyboard.dart';
 import 'package:tomorrow_house/view/theme/component/input_field.dart';
 
 class ShoppingPage extends StatefulWidget {
@@ -56,95 +57,97 @@ class _ShoppingPageState extends State<ShoppingPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          S.current.shopping,
-          style: context.font.headline2,
+    return HideKeyboard(
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(
+            S.current.shopping,
+            style: context.font.headline2,
+          ),
+          actions: [
+            Button(
+              onPressed: () {
+                showModalBottomSheet(
+                  context: context,
+                  builder: (context) {
+                    return const SettingBottomSheet();
+                  },
+                );
+              },
+              icon: 'option-outline.svg',
+              type: ButtonType.flat,
+            ),
+            Button(
+              onPressed: () {},
+              icon: 'basket-outline.svg',
+              type: ButtonType.flat,
+            ),
+          ],
         ),
-        actions: [
-          Button(
-            onPressed: () {
-              showModalBottomSheet(
-                context: context,
-                builder: (context) {
-                  return const SettingBottomSheet();
-                },
-              );
-            },
-            icon: 'option-outline.svg',
-            type: ButtonType.flat,
-          ),
-          Button(
-            onPressed: () {},
-            icon: 'basket-outline.svg',
-            type: ButtonType.flat,
-          ),
-        ],
-      ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 16,
-              vertical: 8,
-            ),
-            child: Row(
-              children: [
-                /// 검색
-                Expanded(
-                  child: InputField(
-                    controller: textController,
-                    hint: S.current.searchProduct,
-                    onClear: searchProductList,
-                    onSubmitted: (text) => searchProductList(),
+        body: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 16,
+                vertical: 8,
+              ),
+              child: Row(
+                children: [
+                  /// 검색
+                  Expanded(
+                    child: InputField(
+                      controller: textController,
+                      hint: S.current.searchProduct,
+                      onClear: searchProductList,
+                      onSubmitted: (text) => searchProductList(),
+                    ),
                   ),
-                ),
-                const SizedBox(width: 16),
+                  const SizedBox(width: 16),
 
-                /// 검색 버튼
-                Button(
-                  icon: 'search-outline.svg',
-                  onPressed: searchProductList,
-                ),
-              ],
+                  /// 검색 버튼
+                  Button(
+                    icon: 'search-outline.svg',
+                    onPressed: searchProductList,
+                  ),
+                ],
+              ),
             ),
-          ),
-          productList.isEmpty
+            productList.isEmpty
 
-              /// Empty
-              ? Expanded(
-                  child: Center(
-                    child: Text(
-                      S.current.noProduct,
-                      style: context.font.headline4.copyWith(
-                        fontWeight: context.font.light,
-                        color: context.color.inactive,
+                /// Empty
+                ? Expanded(
+                    child: Center(
+                      child: Text(
+                        S.current.noProduct,
+                        style: context.font.headline4.copyWith(
+                          fontWeight: context.font.light,
+                          color: context.color.inactive,
+                        ),
                       ),
                     ),
-                  ),
-                )
+                  )
 
-              /// ProductCard 목록
-              : Expanded(
-                  child: MasonryGridView.count(
-                    crossAxisCount: 2,
-                    mainAxisSpacing: 24,
-                    crossAxisSpacing: 16,
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 32,
+                /// ProductCard 목록
+                : Expanded(
+                    child: MasonryGridView.count(
+                      crossAxisCount: 2,
+                      mainAxisSpacing: 24,
+                      crossAxisSpacing: 16,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 32,
+                      ),
+                      itemCount: productList.length,
+                      itemBuilder: (context, index) {
+                        Product product = productList[index];
+
+                        /// ProductCard
+                        return ProductCard(product: product);
+                      },
                     ),
-                    itemCount: productList.length,
-                    itemBuilder: (context, index) {
-                      Product product = productList[index];
-
-                      /// ProductCard
-                      return ProductCard(product: product);
-                    },
                   ),
-                ),
-        ],
+          ],
+        ),
       ),
     );
   }
