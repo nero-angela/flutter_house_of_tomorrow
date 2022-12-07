@@ -2,10 +2,12 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:tomorrow_house/helper/network_helper.dart';
 import 'package:tomorrow_house/model/product.dart';
 import 'package:tomorrow_house/service/theme_service.dart';
 import 'package:tomorrow_house/view/lang/generated/l10n.dart';
+import 'package:tomorrow_house/view/page/shopping/widget/product_card.dart';
 import 'package:tomorrow_house/view/page/shopping/widget/setting_bottom_sheet.dart';
 import 'package:tomorrow_house/view/theme/component/button.dart';
 import 'package:tomorrow_house/view/theme/component/input_field.dart';
@@ -19,6 +21,12 @@ class ShoppingPage extends StatefulWidget {
 
 class _ShoppingPageState extends State<ShoppingPage> {
   List<Product> productList = [];
+
+  @override
+  void initState() {
+    super.initState();
+    searchProductList();
+  }
 
   Future<void> searchProductList() async {
     try {
@@ -89,6 +97,40 @@ class _ShoppingPageState extends State<ShoppingPage> {
               ],
             ),
           ),
+          productList.isEmpty
+
+              /// Empty
+              ? Expanded(
+                  child: Center(
+                    child: Text(
+                      S.current.noProduct,
+                      style: context.font.headline4.copyWith(
+                        fontWeight: context.font.light,
+                        color: context.color.inactive,
+                      ),
+                    ),
+                  ),
+                )
+
+              /// ProductCard 목록
+              : Expanded(
+                  child: MasonryGridView.count(
+                    crossAxisCount: 2,
+                    mainAxisSpacing: 24,
+                    crossAxisSpacing: 16,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 32,
+                    ),
+                    itemCount: productList.length,
+                    itemBuilder: (context, index) {
+                      Product product = productList[index];
+
+                      /// ProductCard
+                      return ProductCard(product: product);
+                    },
+                  ),
+                ),
         ],
       ),
     );

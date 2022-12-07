@@ -1,3 +1,5 @@
+import 'package:tomorrow_house/helper/intl_helper.dart';
+
 class Lang {
   final String ko;
   final String en;
@@ -12,5 +14,10 @@ class Lang {
       ko: json['ko'] ?? '',
       en: json['en'] ?? '',
     );
+  }
+
+  @override
+  String toString() {
+    return IntlHelper.isKo ? ko : en;
   }
 }
