@@ -59,6 +59,256 @@ class S {
       args: [],
     );
   }
+
+  /// `Theme`
+  String get theme {
+    return Intl.message(
+      'Theme',
+      name: 'theme',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Light`
+  String get light {
+    return Intl.message(
+      'Light',
+      name: 'light',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Dark`
+  String get dark {
+    return Intl.message(
+      'Dark',
+      name: 'dark',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Language`
+  String get language {
+    return Intl.message(
+      'Language',
+      name: 'language',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `English`
+  String get en {
+    return Intl.message(
+      'English',
+      name: 'en',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Korean`
+  String get ko {
+    return Intl.message(
+      'Korean',
+      name: 'ko',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Product`
+  String get product {
+    return Intl.message(
+      'Product',
+      name: 'product',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Quantity`
+  String get quantity {
+    return Intl.message(
+      'Quantity',
+      name: 'quantity',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search product`
+  String get searchProduct {
+    return Intl.message(
+      'Search product',
+      name: 'searchProduct',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `There is no product.`
+  String get noProduct {
+    return Intl.message(
+      'There is no product.',
+      name: 'noProduct',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Description`
+  String get description {
+    return Intl.message(
+      'Description',
+      name: 'description',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add to cart`
+  String get addToCart {
+    return Intl.message(
+      'Add to cart',
+      name: 'addToCart',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `{name} was added`
+  String productAdded(Object name) {
+    return Intl.message(
+      '$name was added',
+      name: 'productAdded',
+      desc: '',
+      args: [name],
+    );
+  }
+
+  /// `Total Price`
+  String get totalPrice {
+    return Intl.message(
+      'Total Price',
+      name: 'totalPrice',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cart`
+  String get cart {
+    return Intl.message(
+      'Cart',
+      name: 'cart',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete`
+  String get delete {
+    return Intl.message(
+      'Delete',
+      name: 'delete',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get cancel {
+    return Intl.message(
+      'Cancel',
+      name: 'cancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Do you want to delete the selected product?`
+  String get deleteDialogDesc {
+    return Intl.message(
+      'Do you want to delete the selected product?',
+      name: 'deleteDialogDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The selected items has been deleted.`
+  String get deleteDialogSuccessToast {
+    return Intl.message(
+      'The selected items has been deleted.',
+      name: 'deleteDialogSuccessToast',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `There is no items in the cart.`
+  String get cartIsEmpty {
+    return Intl.message(
+      'There is no items in the cart.',
+      name: 'cartIsEmpty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Checkout`
+  String get checkout {
+    return Intl.message(
+      'Checkout',
+      name: 'checkout',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Would you like to purchase the selected product?`
+  String get checkoutDialogDesc {
+    return Intl.message(
+      'Would you like to purchase the selected product?',
+      name: 'checkoutDialogDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Purchased successfully.`
+  String get checkoutDialogSucessToast {
+    return Intl.message(
+      'Purchased successfully.',
+      name: 'checkoutDialogSucessToast',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Selected Items`
+  String get selectedItems {
+    return Intl.message(
+      'Selected Items',
+      name: 'selectedItems',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `{n} items`
+  String items(Object n) {
+    return Intl.message(
+      '$n items',
+      name: 'items',
+      desc: '',
+      args: [n],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

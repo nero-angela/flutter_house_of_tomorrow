@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tomorrow_house/service/theme_service.dart';
 import 'package:tomorrow_house/view/lang/generated/l10n.dart';
+import 'package:tomorrow_house/view/page/shopping/widget/setting_bottom_sheet.dart';
 import 'package:tomorrow_house/view/theme/component/button.dart';
 
 class ShoppingPage extends StatelessWidget {
@@ -16,7 +17,14 @@ class ShoppingPage extends StatelessWidget {
         ),
         actions: [
           Button(
-            onPressed: () {},
+            onPressed: () {
+              showModalBottomSheet(
+                context: context,
+                builder: (context) {
+                  return const SettingBottomSheet();
+                },
+              );
+            },
             icon: 'option-outline.svg',
             type: ButtonType.flat,
           ),
