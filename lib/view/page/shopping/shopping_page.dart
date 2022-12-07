@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tomorrow_house/service/theme_service.dart';
+import 'package:tomorrow_house/view/lang/generated/l10n.dart';
 
 class ShoppingPage extends StatelessWidget {
   const ShoppingPage({super.key});
@@ -10,7 +11,7 @@ class ShoppingPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Shopping',
+          S.current.shopping,
           style: context.font.headline2,
         ),
         actions: [
@@ -20,6 +21,15 @@ class ShoppingPage extends StatelessWidget {
             },
             icon: Icon(
               Icons.dark_mode,
+              color: context.color.primary,
+            ),
+          ),
+          IconButton(
+            onPressed: () {
+              context.read<ThemeService>().toggleLang();
+            },
+            icon: Icon(
+              Icons.language,
               color: context.color.primary,
             ),
           ),

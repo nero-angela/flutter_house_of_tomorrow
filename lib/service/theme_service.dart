@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tomorrow_house/helper/intl_helper.dart';
+import 'package:tomorrow_house/view/lang/generated/l10n.dart';
 import 'package:tomorrow_house/view/theme/core/app_theme.dart';
 import 'package:tomorrow_house/view/theme/dark_theme.dart';
 import 'package:tomorrow_house/view/theme/light_theme.dart';
@@ -11,6 +13,12 @@ class ThemeService with ChangeNotifier {
 
   /// 현재 테마
   AppTheme theme;
+
+  /// 언어 변경
+  void toggleLang() {
+    S.load(Locale(IntlHelper.isKo ? IntlHelper.en : IntlHelper.ko));
+    notifyListeners();
+  }
 
   /// 테마 변경
   void toggleTheme() {
