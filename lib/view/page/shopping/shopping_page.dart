@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:tomorrow_house/service/theme_service.dart';
 import 'package:tomorrow_house/view/lang/generated/l10n.dart';
+import 'package:tomorrow_house/view/theme/component/button.dart';
 
 class ShoppingPage extends StatelessWidget {
   const ShoppingPage({super.key});
@@ -15,23 +15,15 @@ class ShoppingPage extends StatelessWidget {
           style: context.font.headline2,
         ),
         actions: [
-          IconButton(
-            onPressed: () {
-              context.read<ThemeService>().toggleTheme();
-            },
-            icon: Icon(
-              Icons.dark_mode,
-              color: context.color.primary,
-            ),
+          Button(
+            onPressed: () {},
+            icon: 'option-outline.svg',
+            type: ButtonType.flat,
           ),
-          IconButton(
-            onPressed: () {
-              context.read<ThemeService>().toggleLang();
-            },
-            icon: Icon(
-              Icons.language,
-              color: context.color.primary,
-            ),
+          Button(
+            onPressed: () {},
+            icon: 'basket-outline.svg',
+            type: ButtonType.flat,
           ),
         ],
       ),
