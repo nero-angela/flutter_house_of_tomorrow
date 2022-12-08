@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:tomorrow_house/helper/product_helper.dart';
 import 'package:tomorrow_house/model/product.dart';
@@ -35,10 +36,15 @@ class ProductCard extends StatelessWidget {
           children: [
             /// Image
             if (product.productColorList.isNotEmpty)
-              ClipRRect(
-                borderRadius: BorderRadius.circular(16),
-                child: Image.network(
-                  product.productColorList.first.imageUrl,
+              AspectRatio(
+                aspectRatio: 1 / 1,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(16),
+                  child: CachedNetworkImage(
+                    imageUrl: product.productColorList.first.imageUrl,
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
             const SizedBox(height: 4),

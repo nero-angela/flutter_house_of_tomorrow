@@ -3,6 +3,7 @@ import 'package:tomorrow_house/model/product.dart';
 import 'package:tomorrow_house/view/component/arrow_back_button.dart';
 import 'package:tomorrow_house/view/lang/generated/l10n.dart';
 import 'package:tomorrow_house/view/page/product/widget/product_color_preview.dart';
+import 'package:tomorrow_house/view/theme/component/color_picker.dart';
 
 class ProductPage extends StatefulWidget {
   const ProductPage({
@@ -33,6 +34,23 @@ class _ProductPageState extends State<ProductPage> {
           ProductColorPreview(
             colorIndex: colorIndex,
             product: widget.product,
+          ),
+
+          const SizedBox(height: 32),
+
+          /// 제품 색상
+          ColorPicker(
+            colorIndex: colorIndex,
+            colorList: widget.product.productColorList.map<Color>(
+              (productColor) {
+                return productColor.color;
+              },
+            ).toList(),
+            onSelected: (index) {
+              setState(() {
+                colorIndex = index;
+              });
+            },
           ),
         ],
       ),
