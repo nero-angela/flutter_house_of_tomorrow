@@ -1,4 +1,4 @@
-import 'package:intl/intl.dart';
+import 'package:tomorrow_house/helper/intl_helper.dart';
 import 'package:tomorrow_house/model/cart_item.dart';
 
 extension CartItemListHelper on List<CartItem> {
@@ -11,8 +11,9 @@ extension CartItemListHelper on List<CartItem> {
     final total = fold(0, (previousValue, cartItem) {
       return previousValue + cartItem.count * cartItem.product.price;
     });
-    return NumberFormat.currency(
+    return IntlHelper.currency(
       symbol: first.product.priceUnit,
-    ).format(total);
+      number: total,
+    );
   }
 }
