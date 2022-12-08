@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
+import 'package:tomorrow_house/route_path.dart';
 import 'package:tomorrow_house/service/theme_service.dart';
 import 'package:tomorrow_house/view/lang/generated/l10n.dart';
-import 'package:tomorrow_house/view/page/shopping/shopping_page.dart';
 import 'package:tomorrow_house/view/theme/light_theme.dart';
 
 void main() {
@@ -36,7 +36,8 @@ class MyApp extends StatelessWidget {
       supportedLocales: S.delegate.supportedLocales,
       debugShowCheckedModeBanner: false,
       theme: context.watch<ThemeService>().themeData,
-      home: const ShoppingPage(),
+      initialRoute: RoutePath.shopping,
+      onGenerateRoute: RoutePath.onGenerateRoute,
     );
   }
 }
