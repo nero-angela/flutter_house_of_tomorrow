@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tomorrow_house/service/cart_service.dart';
+import 'package:tomorrow_house/service/theme_service.dart';
 import 'package:tomorrow_house/view/lang/generated/l10n.dart';
-import 'package:tomorrow_house/view/page/cart/widget/cart_item_tile.dart';
+import 'package:tomorrow_house/view/page/cart/widget/cart_delete_dialog.dart';
+import 'package:tomorrow_house/view/page/cart/widget/cart_item_list.dart';
+import 'package:tomorrow_house/view/theme/component/button.dart';
 
 class CartPage extends StatelessWidget {
   const CartPage({super.key});
@@ -13,18 +16,26 @@ class CartPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(S.current.cart),
+        actions: [
+          /// Delete
+          Button(
+            text: S.current.delete,
+            type: ButtonType.flat,
+            color: context.color.secondary,
+            isInactive: cartService.selectedCartItemList.isEmpty,
+            onPressed: () {
+              /// Delete dialog
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return CartDeleteDialog(cartService: cartService);
+                },
+              );
+            },
+          ),
+        ],
       ),
-      body: ListView.builder(
-        itemCount: cartService.cartItemList.length,
-        itemBuilder: (context, index) {
-          final cartItem = cartService.cartItemList[index];
-          return CartItemTile(
-            cartItem: cartItem,
-            onSelected: () {},
-            onCounterChanged: (count) {},
-          );
-        },
-      ),
+      body: CartItemList(cartService: cartService),
     );
   }
 }

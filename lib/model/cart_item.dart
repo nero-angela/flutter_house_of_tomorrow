@@ -12,4 +12,18 @@ class CartItem {
     required this.count,
     required this.isSelected,
   });
+
+  CartItem copyWith({
+    Product? product,
+    int? count,
+    int? colorIndex,
+    bool? isSelected,
+  }) {
+    return CartItem(
+      product: product ?? this.product,
+      count: count ?? this.count,
+      colorIndex: colorIndex ?? this.colorIndex,
+      isSelected: isSelected ?? this.isSelected,
+    );
+  }
 }
