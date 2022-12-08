@@ -4,7 +4,7 @@ import 'package:tomorrow_house/helper/product_helper.dart';
 import 'package:tomorrow_house/model/product.dart';
 import 'package:tomorrow_house/route_path.dart';
 import 'package:tomorrow_house/service/theme_service.dart';
-import 'package:tomorrow_house/view/theme/component/asset_icon.dart';
+import 'package:tomorrow_house/view/theme/component/rating.dart';
 
 class ProductCard extends StatelessWidget {
   const ProductCard({
@@ -77,16 +77,8 @@ class ProductCard extends StatelessWidget {
                 ),
 
                 /// Rating
-                AssetIcon(
-                  'star-fill.svg',
-                  color: context.color.tertiary,
-                  size: 20,
-                ),
-                Text(
-                  product.rating,
-                  style: context.font.body1.copyWith(
-                    fontWeight: context.font.light,
-                  ),
+                Rating(
+                  rating: product.rating,
                 )
               ],
             ),
