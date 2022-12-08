@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tomorrow_house/helper/product_helper.dart';
+import 'package:tomorrow_house/helper/toast_helper.dart';
 import 'package:tomorrow_house/model/cart_item.dart';
 import 'package:tomorrow_house/model/product.dart';
 import 'package:tomorrow_house/service/cart_service.dart';
@@ -84,6 +85,11 @@ class ProductBottomSheet extends StatelessWidget {
                 colorIndex: colorIndex,
                 count: count,
               ));
+
+              /// 상품 추가 toast
+              ToastHelper.show(
+                S.current.productAdded(product.name),
+              );
             },
           ),
         ],

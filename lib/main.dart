@@ -1,3 +1,4 @@
+import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
@@ -28,6 +29,9 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+  static final GlobalKey<NavigatorState> _navigatorKey = GlobalKey();
+  static BuildContext? get context => _navigatorKey.currentContext;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -42,6 +46,14 @@ class MyApp extends StatelessWidget {
       theme: context.watch<ThemeService>().themeData,
       initialRoute: RoutePath.shopping,
       onGenerateRoute: RoutePath.onGenerateRoute,
+      navigatorKey: _navigatorKey,
+      builder: (context, child) {
+        child = Toast(
+          navigatorKey: _navigatorKey,
+          child: child ?? const SizedBox(),
+        );
+        return child;
+      },
     );
   }
 }
