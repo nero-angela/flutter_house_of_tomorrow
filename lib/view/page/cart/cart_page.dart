@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tomorrow_house/service/cart_service.dart';
 import 'package:tomorrow_house/service/theme_service.dart';
+import 'package:tomorrow_house/view/component/arrow_back_button.dart';
 import 'package:tomorrow_house/view/lang/generated/l10n.dart';
+import 'package:tomorrow_house/view/page/cart/widget/cart_bottom_sheet.dart';
 import 'package:tomorrow_house/view/page/cart/widget/cart_delete_dialog.dart';
 import 'package:tomorrow_house/view/page/cart/widget/cart_empty.dart';
 import 'package:tomorrow_house/view/page/cart/widget/cart_item_list.dart';
@@ -17,6 +19,7 @@ class CartPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(S.current.cart),
+        leading: const ArrowBackButton(),
         actions: [
           /// Delete
           Button(
@@ -36,13 +39,22 @@ class CartPage extends StatelessWidget {
           ),
         ],
       ),
-      body: cartService.cartItemList.isEmpty
+      body: Column(
+        children: [
+          Expanded(
+            child: cartService.cartItemList.isEmpty
 
-          /// Empty
-          ? const CartEmpty()
+                /// Empty
+                ? const CartEmpty()
 
-          /// Not Empty
-          : CartItemList(cartService: cartService),
+                /// Not Empty
+                : CartItemList(cartService: cartService),
+          ),
+
+          /// BottomSheet
+          CartBottomSheet(cartService: cartService),
+        ],
+      ),
     );
   }
 }
