@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tomorrow_house/model/product.dart';
+import 'package:tomorrow_house/view/component/arrow_back_button.dart';
 import 'package:tomorrow_house/view/lang/generated/l10n.dart';
 
 class ProductPage extends StatelessWidget {
@@ -15,6 +16,7 @@ class ProductPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(S.current.product),
+        leading: const ArrowBackButton(),
       ),
     );
   }

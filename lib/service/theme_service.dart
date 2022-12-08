@@ -38,6 +38,7 @@ class ThemeService with ChangeNotifier {
 
       /// AppBar
       appBarTheme: AppBarTheme(
+        titleSpacing: 0,
         backgroundColor: theme.color.surface,
         elevation: 0,
         centerTitle: false,

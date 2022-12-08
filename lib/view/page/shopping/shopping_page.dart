@@ -60,6 +60,7 @@ class _ShoppingPageState extends State<ShoppingPage> {
     return HideKeyboard(
       child: Scaffold(
         appBar: AppBar(
+          titleSpacing: 16,
           title: Text(
             S.current.shopping,
             style: context.font.headline2,
