@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tomorrow_house/model/product.dart';
 import 'package:tomorrow_house/view/component/arrow_back_button.dart';
+import 'package:tomorrow_house/view/component/cart_button.dart';
 import 'package:tomorrow_house/view/lang/generated/l10n.dart';
 import 'package:tomorrow_house/view/page/product/widget/product_bottom_sheet.dart';
 import 'package:tomorrow_house/view/page/product/widget/product_info.dart';
@@ -30,6 +31,9 @@ class _ProductPageState extends State<ProductPage> {
       appBar: AppBar(
         title: Text(S.current.product),
         leading: const ArrowBackButton(),
+        actions: const [
+          CartButton(),
+        ],
       ),
       body: Column(
         children: [

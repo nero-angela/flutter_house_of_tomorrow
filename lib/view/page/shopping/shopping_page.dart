@@ -6,6 +6,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:tomorrow_house/helper/network_helper.dart';
 import 'package:tomorrow_house/model/product.dart';
 import 'package:tomorrow_house/service/theme_service.dart';
+import 'package:tomorrow_house/view/component/cart_button.dart';
 import 'package:tomorrow_house/view/lang/generated/l10n.dart';
 import 'package:tomorrow_house/view/page/shopping/widget/product_card.dart';
 import 'package:tomorrow_house/view/page/shopping/widget/setting_bottom_sheet.dart';
@@ -78,11 +79,7 @@ class _ShoppingPageState extends State<ShoppingPage> {
               icon: 'option-outline.svg',
               type: ButtonType.flat,
             ),
-            Button(
-              onPressed: () {},
-              icon: 'basket-outline.svg',
-              type: ButtonType.flat,
-            ),
+            const CartButton(),
           ],
         ),
         body: Column(

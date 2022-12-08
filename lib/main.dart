@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:tomorrow_house/route_path.dart';
+import 'package:tomorrow_house/service/cart_service.dart';
 import 'package:tomorrow_house/service/theme_service.dart';
 import 'package:tomorrow_house/view/lang/generated/l10n.dart';
 import 'package:tomorrow_house/view/theme/light_theme.dart';
@@ -14,7 +15,10 @@ void main() {
           create: (context) => ThemeService(
             theme: LightTheme(),
           ),
-        )
+        ),
+        ChangeNotifierProvider(
+          create: (context) => CartService(),
+        ),
       ],
       child: const MyApp(),
     ),

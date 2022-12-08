@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:tomorrow_house/helper/product_helper.dart';
+import 'package:tomorrow_house/model/cart_item.dart';
 import 'package:tomorrow_house/model/product.dart';
+import 'package:tomorrow_house/service/cart_service.dart';
 import 'package:tomorrow_house/service/theme_service.dart';
 import 'package:tomorrow_house/view/lang/generated/l10n.dart';
 import 'package:tomorrow_house/view/theme/component/base_bottom_sheet.dart';
@@ -72,7 +75,16 @@ class ProductBottomSheet extends StatelessWidget {
             width: double.infinity,
             size: ButtonSize.large,
             text: S.current.addToCart,
-            onPressed: () {},
+            onPressed: () {
+              final cartService = context.read<CartService>();
+
+              /// Cart에 상품 추가
+              cartService.addToCart(CartItem(
+                product: product,
+                colorIndex: colorIndex,
+                count: count,
+              ));
+            },
           ),
         ],
       ),
