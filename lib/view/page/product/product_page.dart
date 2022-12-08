@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tomorrow_house/model/product.dart';
 import 'package:tomorrow_house/view/component/arrow_back_button.dart';
 import 'package:tomorrow_house/view/lang/generated/l10n.dart';
-import 'package:tomorrow_house/view/page/product/widget/product_color_preview.dart';
-import 'package:tomorrow_house/view/page/product/widget/product_desc.dart';
-import 'package:tomorrow_house/view/theme/component/color_picker.dart';
+import 'package:tomorrow_house/view/page/product/widget/product_info.dart';
 
 class ProductPage extends StatefulWidget {
   const ProductPage({
@@ -29,39 +27,14 @@ class _ProductPageState extends State<ProductPage> {
         title: Text(S.current.product),
         leading: const ArrowBackButton(),
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(vertical: 32),
-        child: Column(
-          children: [
-            /// 제품 색상 이미지
-            ProductColorPreview(
-              colorIndex: colorIndex,
-              product: widget.product,
-            ),
-
-            const SizedBox(height: 32),
-
-            /// 제품 색상
-            ColorPicker(
-              colorIndex: colorIndex,
-              colorList: widget.product.productColorList.map<Color>(
-                (productColor) {
-                  return productColor.color;
-                },
-              ).toList(),
-              onSelected: (index) {
-                setState(() {
-                  colorIndex = index;
-                });
-              },
-            ),
-
-            const SizedBox(height: 32),
-
-            /// 제품 설명
-            ProductDesc(product: widget.product),
-          ],
-        ),
+      body: ProductInfo(
+        colorIndex: colorIndex,
+        product: widget.product,
+        onColorSelected: (index) {
+          setState(() {
+            colorIndex = index;
+          });
+        },
       ),
     );
   }
