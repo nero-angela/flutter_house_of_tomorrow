@@ -4,6 +4,7 @@ import 'package:tomorrow_house/service/cart_service.dart';
 import 'package:tomorrow_house/service/theme_service.dart';
 import 'package:tomorrow_house/view/lang/generated/l10n.dart';
 import 'package:tomorrow_house/view/page/cart/widget/cart_delete_dialog.dart';
+import 'package:tomorrow_house/view/page/cart/widget/cart_empty.dart';
 import 'package:tomorrow_house/view/page/cart/widget/cart_item_list.dart';
 import 'package:tomorrow_house/view/theme/component/button.dart';
 
@@ -35,7 +36,13 @@ class CartPage extends StatelessWidget {
           ),
         ],
       ),
-      body: CartItemList(cartService: cartService),
+      body: cartService.cartItemList.isEmpty
+
+          /// Empty
+          ? const CartEmpty()
+
+          /// Not Empty
+          : CartItemList(cartService: cartService),
     );
   }
 }
