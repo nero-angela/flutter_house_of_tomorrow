@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tomorrow_house/route_path.dart';
 import 'package:tomorrow_house/service/cart_service.dart';
 import 'package:tomorrow_house/view/theme/component/badge.dart';
 import 'package:tomorrow_house/view/theme/component/button.dart';
@@ -17,7 +18,10 @@ class CartButton extends StatelessWidget {
       child: Button(
         icon: 'basket-outline.svg',
         type: ButtonType.flat,
-        onPressed: () {},
+        onPressed: () {
+          /// CartPage로 이동
+          Navigator.pushNamed(context, RoutePath.cart);
+        },
       ),
     );
   }

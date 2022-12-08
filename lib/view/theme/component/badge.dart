@@ -25,14 +25,17 @@ class Badge extends StatelessWidget {
         Positioned(
           top: 10,
           right: 6,
-          child: CircleAvatar(
-            backgroundColor: context.color.secondary,
-            radius: isShow ? 10 : 0,
-            child: Text(
-              label,
-              style: context.font.body2.copyWith(
-                fontWeight: context.font.light,
-                color: context.color.onSecondary,
+          child: IgnorePointer(
+            ignoring: true,
+            child: CircleAvatar(
+              backgroundColor: context.color.secondary,
+              radius: isShow ? 10 : 0,
+              child: Text(
+                label,
+                style: context.font.body2.copyWith(
+                  fontWeight: context.font.light,
+                  color: context.color.onSecondary,
+                ),
               ),
             ),
           ),
