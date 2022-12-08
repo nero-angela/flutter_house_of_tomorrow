@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tomorrow_house/model/product.dart';
 import 'package:tomorrow_house/view/component/arrow_back_button.dart';
 import 'package:tomorrow_house/view/lang/generated/l10n.dart';
+import 'package:tomorrow_house/view/page/product/widget/product_bottom_sheet.dart';
 import 'package:tomorrow_house/view/page/product/widget/product_info.dart';
 
 class ProductPage extends StatefulWidget {
@@ -20,6 +21,9 @@ class _ProductPageState extends State<ProductPage> {
   /// 선택된 색상 index
   int colorIndex = 0;
 
+  /// 수량
+  int totalCount = 1;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,14 +31,30 @@ class _ProductPageState extends State<ProductPage> {
         title: Text(S.current.product),
         leading: const ArrowBackButton(),
       ),
-      body: ProductInfo(
-        colorIndex: colorIndex,
-        product: widget.product,
-        onColorSelected: (index) {
-          setState(() {
-            colorIndex = index;
-          });
-        },
+      body: Column(
+        children: [
+          Expanded(
+            child: ProductInfo(
+              colorIndex: colorIndex,
+              product: widget.product,
+              onColorSelected: (index) {
+                setState(() {
+                  colorIndex = index;
+                });
+              },
+            ),
+          ),
+          ProductBottomSheet(
+            product: widget.product,
+            colorIndex: colorIndex,
+            count: totalCount,
+            onCountChanged: (count) {
+              setState(() {
+                totalCount = count;
+              });
+            },
+          ),
+        ],
       ),
     );
   }
