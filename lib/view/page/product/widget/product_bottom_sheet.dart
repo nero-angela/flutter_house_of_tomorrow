@@ -84,6 +84,7 @@ class ProductBottomSheet extends StatelessWidget {
                 product: product,
                 colorIndex: colorIndex,
                 count: count,
+                isSelected: true,
               ));
 
               /// 상품 추가 toast
