@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tomorrow_house/helper/intl_helper.dart';
+import 'package:tomorrow_house/helper/responsive_helper.dart';
 import 'package:tomorrow_house/view/lang/generated/l10n.dart';
 import 'package:tomorrow_house/view/theme/core/app_theme.dart';
 import 'package:tomorrow_house/view/theme/dark_theme.dart';
@@ -53,6 +54,9 @@ class ThemeService with ChangeNotifier {
       /// BottomSheet
       bottomSheetTheme: const BottomSheetThemeData(
         backgroundColor: Colors.transparent,
+        constraints: BoxConstraints(
+          maxWidth: ResponsiveConfig.bottomSheetMaxWidth,
+        ),
       ),
     );
   }

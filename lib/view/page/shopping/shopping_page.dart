@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:tomorrow_house/helper/network_helper.dart';
+import 'package:tomorrow_house/helper/responsive_helper.dart';
 import 'package:tomorrow_house/model/product.dart';
 import 'package:tomorrow_house/service/theme_service.dart';
 import 'package:tomorrow_house/view/component/cart_button.dart';
@@ -128,7 +129,11 @@ class _ShoppingPageState extends State<ShoppingPage> {
                 /// ProductCard 목록
                 : Expanded(
                     child: MasonryGridView.count(
-                      crossAxisCount: 2,
+                      crossAxisCount: context.responsive(
+                        2,
+                        tablet: 3,
+                        desktop: 4,
+                      ),
                       mainAxisSpacing: 24,
                       crossAxisSpacing: 16,
                       padding: const EdgeInsets.symmetric(
