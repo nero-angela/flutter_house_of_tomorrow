@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tomorrow_house/helper/cart_item_helper.dart';
+import 'package:tomorrow_house/helper/responsive_helper.dart';
 import 'package:tomorrow_house/service/cart_service.dart';
 import 'package:tomorrow_house/service/theme_service.dart';
 import 'package:tomorrow_house/view/lang/generated/l10n.dart';
@@ -19,8 +20,9 @@ class CartBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     /// Bottom Sheet
     return BaseBottomSheet(
-      padding: const EdgeInsets.only(
-        top: 32,
+      isRoundAll: context.responsive(false, desktop: true),
+      padding: EdgeInsets.only(
+        top: context.responsive(32, desktop: 16),
         left: 16,
         right: 16,
         bottom: 16,

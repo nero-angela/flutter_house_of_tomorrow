@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tomorrow_house/helper/responsive_helper.dart';
 import 'package:tomorrow_house/service/cart_service.dart';
 import 'package:tomorrow_house/service/theme_service.dart';
 import 'package:tomorrow_house/view/component/arrow_back_button.dart';
@@ -39,21 +40,62 @@ class CartPage extends StatelessWidget {
           ),
         ],
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: cartService.cartItemList.isEmpty
+      body: context.responsive(
+        /// Mobile & Tablet
+        Column(
+          children: [
+            Expanded(
+              child: cartService.cartItemList.isEmpty
 
-                /// Empty
-                ? const CartEmpty()
+                  /// Empty
+                  ? const CartEmpty()
 
-                /// Not Empty
-                : CartItemList(cartService: cartService),
+                  /// Not Empty
+                  : CartItemList(cartService: cartService),
+            ),
+
+            /// BottomSheet
+            CartBottomSheet(cartService: cartService),
+          ],
+        ),
+
+        /// Desktop
+        desktop: Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 16,
+            vertical: 32,
           ),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                flex: 2,
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(24),
+                    color: context.color.surface,
+                    boxShadow: context.deco.shadow,
+                  ),
+                  padding: const EdgeInsets.all(16),
+                  child: cartService.cartItemList.isEmpty
 
-          /// BottomSheet
-          CartBottomSheet(cartService: cartService),
-        ],
+                      /// Empty
+                      ? const CartEmpty()
+
+                      /// Not Empty
+                      : CartItemList(cartService: cartService),
+                ),
+              ),
+              const SizedBox(width: 16),
+
+              /// BottomSheet
+              Expanded(
+                flex: 1,
+                child: CartBottomSheet(cartService: cartService),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
