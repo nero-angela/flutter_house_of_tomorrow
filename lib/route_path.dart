@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tomorrow_house/model/product.dart';
+import 'package:tomorrow_house/view/component/constrained_screen.dart';
 import 'package:tomorrow_house/view/page/cart/cart_page.dart';
 import 'package:tomorrow_house/view/page/product/product_page.dart';
 import 'package:tomorrow_house/view/page/shopping/shopping_page.dart';
@@ -26,7 +27,7 @@ abstract class RoutePath {
 
     return MaterialPageRoute(
       builder: (context) {
-        return page;
+        return ConstrainedScreen(child: page);
       },
     );
   }
