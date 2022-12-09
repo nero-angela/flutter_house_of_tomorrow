@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_design_system/flutter_design_system.dart';
 import 'package:provider/provider.dart';
 import 'package:tomorrow_house/helper/intl_helper.dart';
-import 'package:tomorrow_house/service/theme_service.dart';
+import 'package:tomorrow_house/service/lang_service.dart';
 import 'package:tomorrow_house/view/lang/generated/l10n.dart';
-import 'package:tomorrow_house/view/theme/component/base_bottom_sheet.dart';
-import 'package:tomorrow_house/view/theme/component/tile.dart';
 
 class SettingBottomSheet extends StatelessWidget {
   const SettingBottomSheet({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final langService = context.watch<LangService>();
     return BaseBottomSheet(
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -33,7 +33,7 @@ class SettingBottomSheet extends StatelessWidget {
             title: S.current.language,
             subtitle: IntlHelper.isKo ? S.current.ko : S.current.en,
             onPressed: () {
-              context.read<ThemeService>().toggleLang();
+              langService.toggleLang();
             },
           ),
         ],

@@ -1,9 +1,8 @@
 import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_design_system/flutter_design_system.dart';
 import 'package:provider/provider.dart';
 import 'package:tomorrow_house/main.dart';
-import 'package:tomorrow_house/service/theme_service.dart';
-import 'package:tomorrow_house/view/theme/core/app_theme.dart';
 
 abstract class ToastHelper {
   static void show(String msg) {

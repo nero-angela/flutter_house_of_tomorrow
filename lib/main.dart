@@ -1,27 +1,27 @@
 import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_design_system/flutter_design_system.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:tomorrow_house/route_path.dart';
 import 'package:tomorrow_house/service/cart_service.dart';
-import 'package:tomorrow_house/service/theme_service.dart';
+import 'package:tomorrow_house/service/lang_service.dart';
 import 'package:tomorrow_house/view/lang/generated/l10n.dart';
-import 'package:tomorrow_house/view/theme/light_theme.dart';
 
 void main() {
   runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider(
-          create: (context) => ThemeService(
-            theme: LightTheme(),
+    ThemeInjector(
+      child: MultiProvider(
+        providers: [
+          ChangeNotifierProvider(
+            create: (context) => LangService(),
           ),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => CartService(),
-        ),
-      ],
-      child: const MyApp(),
+          ChangeNotifierProvider(
+            create: (context) => CartService(),
+          ),
+        ],
+        child: const MyApp(),
+      ),
     ),
   );
 }
@@ -44,6 +44,7 @@ class MyApp extends StatelessWidget {
       supportedLocales: S.delegate.supportedLocales,
       debugShowCheckedModeBanner: false,
       theme: context.watch<ThemeService>().themeData,
+      locale: context.watch<LangService>().currentLocale,
       initialRoute: RoutePath.shopping,
       onGenerateRoute: RoutePath.onGenerateRoute,
       navigatorKey: _navigatorKey,

@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_design_system/flutter_design_system.dart';
 import 'package:provider/provider.dart';
 import 'package:tomorrow_house/helper/product_helper.dart';
-import 'package:tomorrow_house/helper/responsive_helper.dart';
 import 'package:tomorrow_house/helper/toast_helper.dart';
 import 'package:tomorrow_house/model/cart_item.dart';
 import 'package:tomorrow_house/model/product.dart';
 import 'package:tomorrow_house/service/cart_service.dart';
-import 'package:tomorrow_house/service/theme_service.dart';
 import 'package:tomorrow_house/view/lang/generated/l10n.dart';
-import 'package:tomorrow_house/view/theme/component/base_bottom_sheet.dart';
-import 'package:tomorrow_house/view/theme/component/button.dart';
-import 'package:tomorrow_house/view/theme/component/counter_button.dart';
 
 class ProductBottomSheet extends StatelessWidget {
   const ProductBottomSheet({

@@ -1,10 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_design_system/flutter_design_system.dart';
 import 'package:tomorrow_house/helper/product_helper.dart';
 import 'package:tomorrow_house/model/product.dart';
 import 'package:tomorrow_house/route_path.dart';
-import 'package:tomorrow_house/service/theme_service.dart';
-import 'package:tomorrow_house/view/theme/component/rating.dart';
 
 class ProductCard extends StatelessWidget {
   const ProductCard({

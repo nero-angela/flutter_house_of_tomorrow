@@ -2,18 +2,14 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_design_system/flutter_design_system.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:tomorrow_house/helper/network_helper.dart';
-import 'package:tomorrow_house/helper/responsive_helper.dart';
 import 'package:tomorrow_house/model/product.dart';
-import 'package:tomorrow_house/service/theme_service.dart';
 import 'package:tomorrow_house/view/component/cart_button.dart';
 import 'package:tomorrow_house/view/lang/generated/l10n.dart';
 import 'package:tomorrow_house/view/page/shopping/widget/product_card.dart';
 import 'package:tomorrow_house/view/page/shopping/widget/setting_bottom_sheet.dart';
-import 'package:tomorrow_house/view/theme/component/button.dart';
-import 'package:tomorrow_house/view/theme/component/hide_keyboard.dart';
-import 'package:tomorrow_house/view/theme/component/input_field.dart';
 
 class ShoppingPage extends StatefulWidget {
   const ShoppingPage({super.key});

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_design_system/flutter_design_system.dart';
 import 'package:tomorrow_house/model/product.dart';
 import 'package:tomorrow_house/view/page/product/widget/product_color_preview.dart';
 import 'package:tomorrow_house/view/page/product/widget/product_desc.dart';
-import 'package:tomorrow_house/view/theme/component/color_picker.dart';
 
 class ProductInfo extends StatelessWidget {
   const ProductInfo({

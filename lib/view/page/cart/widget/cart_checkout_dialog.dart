@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_design_system/flutter_design_system.dart';
 import 'package:tomorrow_house/helper/toast_helper.dart';
 import 'package:tomorrow_house/service/cart_service.dart';
-import 'package:tomorrow_house/service/theme_service.dart';
 import 'package:tomorrow_house/view/lang/generated/l10n.dart';
-import 'package:tomorrow_house/view/theme/component/base_dialog.dart';
-import 'package:tomorrow_house/view/theme/component/button.dart';
 
 class CartCheckoutDialog extends StatelessWidget {
   const CartCheckoutDialog({

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tomorrow_house/helper/responsive_helper.dart';
-import 'package:tomorrow_house/service/theme_service.dart';
+import 'package:flutter_design_system/flutter_design_system.dart';
 
 class ConstrainedScreen extends StatelessWidget {
   const ConstrainedScreen({

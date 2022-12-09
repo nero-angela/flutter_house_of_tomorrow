@@ -1,10 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_design_system/flutter_design_system.dart';
 import 'package:tomorrow_house/helper/product_helper.dart';
 import 'package:tomorrow_house/model/cart_item.dart';
-import 'package:tomorrow_house/service/theme_service.dart';
-import 'package:tomorrow_house/view/theme/component/asset_icon.dart';
-import 'package:tomorrow_house/view/theme/component/counter_button.dart';
 
 class CartItemTile extends StatelessWidget {
   const CartItemTile({
