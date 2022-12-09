@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tomorrow_house/helper/product_helper.dart';
+import 'package:tomorrow_house/helper/responsive_helper.dart';
 import 'package:tomorrow_house/helper/toast_helper.dart';
 import 'package:tomorrow_house/model/cart_item.dart';
 import 'package:tomorrow_house/model/product.dart';
@@ -28,8 +29,9 @@ class ProductBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseBottomSheet(
-      padding: const EdgeInsets.only(
-        top: 32,
+      isRoundAll: context.responsive(false, desktop: true),
+      padding: EdgeInsets.only(
+        top: context.responsive(32, desktop: 16),
         bottom: 16,
         left: 16,
         right: 16,

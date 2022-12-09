@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tomorrow_house/helper/responsive_helper.dart';
 import 'package:tomorrow_house/model/product.dart';
 import 'package:tomorrow_house/view/component/arrow_back_button.dart';
 import 'package:tomorrow_house/view/component/cart_button.dart';
@@ -35,31 +36,63 @@ class _ProductPageState extends State<ProductPage> {
           CartButton(),
         ],
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: ProductInfo(
-              colorIndex: colorIndex,
-              product: widget.product,
-              onColorSelected: (index) {
-                setState(() {
-                  colorIndex = index;
-                });
-              },
+      body: context.responsive(
+        /// Mobile & Tablet
+        Column(
+          children: [
+            Expanded(
+              child: buildProductInfo(),
             ),
-          ),
-          ProductBottomSheet(
-            product: widget.product,
-            colorIndex: colorIndex,
-            count: totalCount,
-            onCountChanged: (count) {
-              setState(() {
-                totalCount = count;
-              });
-            },
-          ),
-        ],
+            buildProductBottomSheet(),
+          ],
+        ),
+
+        /// Desktop
+        desktop: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(width: 16),
+            Expanded(
+              flex: 2,
+              child: buildProductInfo(),
+            ),
+            const SizedBox(width: 16),
+            Expanded(
+              flex: 1,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 32),
+                child: buildProductBottomSheet(),
+              ),
+            ),
+            const SizedBox(width: 16),
+          ],
+        ),
       ),
+    );
+  }
+
+  ProductBottomSheet buildProductBottomSheet() {
+    return ProductBottomSheet(
+      product: widget.product,
+      colorIndex: colorIndex,
+      count: totalCount,
+      onCountChanged: (count) {
+        setState(() {
+          totalCount = count;
+        });
+      },
+    );
+  }
+
+  ProductInfo buildProductInfo() {
+    return ProductInfo(
+      colorIndex: colorIndex,
+      product: widget.product,
+      onColorSelected: (index) {
+        setState(() {
+          colorIndex = index;
+        });
+      },
     );
   }
 }
