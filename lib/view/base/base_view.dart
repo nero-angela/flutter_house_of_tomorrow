@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tomorrow_house/view/base/base_view_model.dart';
+import 'package:tomorrow_house/view/component/circular_indicator.dart';
 
 class BaseView<T extends BaseViewModel> extends StatelessWidget {
   const BaseView({
@@ -18,7 +19,10 @@ class BaseView<T extends BaseViewModel> extends StatelessWidget {
       create: (context) => viewModel,
       child: Consumer<T>(
         builder: (context, viewModel, child) {
-          return builder(context, viewModel);
+          return CircularIndicator(
+            isBusy: viewModel.isBusy,
+            child: builder(context, viewModel),
+          );
         },
       ),
     );

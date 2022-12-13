@@ -10,7 +10,12 @@ class ShoppingPageModel extends BaseViewModel {
   String get keyword => textController.text.trim();
 
   Future<void> searchProductList() async {
-    productList = await productRepository.fetchProductList(keyword);
-    notifyListeners();
+    isBusy = true;
+    final results = await Future.wait([
+      productRepository.fetchProductList(keyword),
+      Future.delayed(const Duration(milliseconds: 555)),
+    ]);
+    productList = results[0];
+    isBusy = false;
   }
 }
