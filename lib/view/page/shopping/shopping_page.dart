@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:provider/provider.dart';
 import 'package:tomorrow_house/helper/responsive_helper.dart';
 import 'package:tomorrow_house/model/product.dart';
 import 'package:tomorrow_house/service/theme_service.dart';
@@ -21,11 +22,14 @@ class ShoppingPage extends StatefulWidget {
 }
 
 class _ShoppingPageState extends State<ShoppingPage> {
-  final ShoppingPageModel shoppingPageModel = ShoppingPageModel();
+  late final ShoppingPageModel shoppingPageModel;
 
   @override
   void initState() {
     super.initState();
+    shoppingPageModel = ShoppingPageModel(
+      productRepository: context.read(),
+    );
     shoppingPageModel.searchProductList();
   }
 

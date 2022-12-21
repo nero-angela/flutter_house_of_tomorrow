@@ -1,15 +1,20 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:dio/dio.dart';
 import 'package:tomorrow_house/helper/network_helper.dart';
 import 'package:tomorrow_house/model/product.dart';
 
 class ProductRepository {
+  const ProductRepository({
+    required this.dio,
+  });
+
+  final Dio dio;
+
   Future<List<Product>> fetchProductList(String keyword) async {
     try {
-      final res = await NetworkHelper.dio.get(
-        'https://gist.githubusercontent.com/nero-angela/d16a5078c7959bf5abf6a9e0f8c2851a/raw/04fb4d21ddd1ba06f0349a890f5e5347d94d677e/ikeaSofaDataIBB.json',
-      );
+      final res = await dio.get(NetworkHelper.productListUrl);
 
       return jsonDecode(res.data).map<Product>((json) {
         return Product.fromJson(json);

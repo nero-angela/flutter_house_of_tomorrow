@@ -2,6 +2,8 @@ import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
+import 'package:tomorrow_house/helper/network_helper.dart';
+import 'package:tomorrow_house/repository/product_repository.dart';
 import 'package:tomorrow_house/route_path.dart';
 import 'package:tomorrow_house/service/cart_service.dart';
 import 'package:tomorrow_house/service/theme_service.dart';
@@ -12,6 +14,9 @@ void main() {
   runApp(
     MultiProvider(
       providers: [
+        Provider(
+          create: (context) => ProductRepository(dio: NetworkHelper.dio),
+        ),
         ChangeNotifierProvider(
           create: (context) => ThemeService(
             theme: LightTheme(),

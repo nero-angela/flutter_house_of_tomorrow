@@ -4,9 +4,13 @@ import 'package:tomorrow_house/repository/product_repository.dart';
 import 'package:tomorrow_house/view/base/base_view_model.dart';
 
 class ShoppingPageModel extends BaseViewModel {
+  ShoppingPageModel({
+    required this.productRepository,
+  });
+
   List<Product> productList = [];
   final TextEditingController textController = TextEditingController();
-  final ProductRepository productRepository = ProductRepository();
+  final ProductRepository productRepository;
   String get keyword => textController.text.trim();
 
   Future<void> searchProductList() async {
