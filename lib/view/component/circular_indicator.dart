@@ -30,6 +30,7 @@ class CircularIndicator extends StatelessWidget {
                 alignment: Alignment.center,
                 child: CircularProgressIndicator(
                   color: context.color.primary,
+                  value: isBusy ? null : 0,
                 ),
               ),
             ),
