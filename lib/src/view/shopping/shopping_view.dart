@@ -8,13 +8,13 @@ class ShoppingView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: context.watch<ThemeService>().theme.color.surface,
+      backgroundColor: context.color.surface,
       body: Center(
         child: TextButton(
           onPressed: context.read<ThemeService>().toggleTheme,
           child: Text(
             "Toggle Theme",
-            style: context.watch<ThemeService>().theme.typo.headline6,
+            style: context.typo.headline6,
           ),
         ),
       ),

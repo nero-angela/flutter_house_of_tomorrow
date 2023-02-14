@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:house_of_tomorrow/theme/dark_theme.dart';
 import 'package:house_of_tomorrow/theme/foundation/app_theme.dart';
 import 'package:house_of_tomorrow/theme/light_theme.dart';
+import 'package:provider/provider.dart';
 
 class ThemeService with ChangeNotifier {
   ThemeService({
@@ -20,4 +21,12 @@ class ThemeService with ChangeNotifier {
     }
     notifyListeners();
   }
+}
+
+extension ThemeServiceExt on BuildContext {
+  ThemeService get themeService => watch<ThemeService>();
+  AppTheme get theme => themeService.theme;
+  AppColor get color => theme.color;
+  AppDeco get deco => theme.deco;
+  AppTypo get typo => theme.typo;
 }
