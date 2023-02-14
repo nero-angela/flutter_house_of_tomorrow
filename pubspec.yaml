@@ -97,3 +97,5 @@ flutter:
           weight: 400
         - asset: assets/fonts/NotoSans-SemiBold.ttf
           weight: 600
+  assets:
+    - assets/icons/
