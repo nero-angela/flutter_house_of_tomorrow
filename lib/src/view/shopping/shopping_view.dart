@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:house_of_tomorrow/src/service/theme_service.dart';
+import 'package:house_of_tomorrow/theme/component/button/button.dart';
 import 'package:house_of_tomorrow/util/lang/generated/l10n.dart';
 import 'package:provider/provider.dart';
 
@@ -11,6 +12,14 @@ class ShoppingView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(S.current.shopping),
+        actions: [
+          /// 설정 버튼
+          Button(
+            icon: 'option',
+            type: ButtonType.flat,
+            onPressed: () {},
+          ),
+        ],
       ),
       body: Center(
         child: TextButton(
