@@ -1,11 +1,32 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:house_of_tomorrow/theme/component/bottom_sheet/setting_bottom_sheet.dart';
 import 'package:house_of_tomorrow/theme/component/button/button.dart';
 import 'package:house_of_tomorrow/theme/component/input_field.dart';
+import 'package:house_of_tomorrow/util/helper/network_helper.dart';
 import 'package:house_of_tomorrow/util/lang/generated/l10n.dart';
 
-class ShoppingView extends StatelessWidget {
+class ShoppingView extends StatefulWidget {
   const ShoppingView({super.key});
+
+  @override
+  State<ShoppingView> createState() => _ShoppingViewState();
+}
+
+class _ShoppingViewState extends State<ShoppingView> {
+  List productList = [];
+
+  Future<void> searchProductList() async {
+    try {
+      final res = await NetworkHelper.dio.get(
+        'https://gist.githubusercontent.com/nero-angela/d16a5078c7959bf5abf6a9e0f8c2851a/raw/04fb4d21ddd1ba06f0349a890f5e5347d94d677e/ikeaSofaDataIBB.json',
+      );
+      print(res.data);
+    } catch (e, s) {
+      log('Failed to searchProductList', error: e, stackTrace: s);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +70,7 @@ class ShoppingView extends StatelessWidget {
                 /// 검색 버튼
                 Button(
                   icon: 'search',
-                  onPressed: () {},
+                  onPressed: searchProductList,
                 ),
               ],
             ),
