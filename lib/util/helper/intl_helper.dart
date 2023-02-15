@@ -8,4 +8,15 @@ abstract class IntlHelper {
 
   /// 한국어 여부
   static bool get isKo => Intl.getCurrentLocale() == ko.languageCode;
+
+  /// 통화
+  static String currency({
+    required String symbol,
+    required int number,
+  }) {
+    return NumberFormat.currency(
+      symbol: symbol,
+      locale: (symbol == '￦' ? ko : en).languageCode,
+    ).format(number);
+  }
 }
