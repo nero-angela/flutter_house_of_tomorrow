@@ -1,6 +1,8 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:house_of_tomorrow/src/model/product.dart';
 import 'package:house_of_tomorrow/theme/component/bottom_sheet/setting_bottom_sheet.dart';
 import 'package:house_of_tomorrow/theme/component/button/button.dart';
 import 'package:house_of_tomorrow/theme/component/input_field.dart';
@@ -15,14 +17,19 @@ class ShoppingView extends StatefulWidget {
 }
 
 class _ShoppingViewState extends State<ShoppingView> {
-  List productList = [];
+  List<Product> productList = [];
 
   Future<void> searchProductList() async {
     try {
       final res = await NetworkHelper.dio.get(
         'https://gist.githubusercontent.com/nero-angela/d16a5078c7959bf5abf6a9e0f8c2851a/raw/04fb4d21ddd1ba06f0349a890f5e5347d94d677e/ikeaSofaDataIBB.json',
       );
-      print(res.data);
+
+      setState(() {
+        productList = jsonDecode(res.data).map<Product>((json) {
+          return Product.fromJson(json);
+        }).toList();
+      });
     } catch (e, s) {
       log('Failed to searchProductList', error: e, stackTrace: s);
     }
