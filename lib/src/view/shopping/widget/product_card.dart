@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:house_of_tomorrow/src/model/product.dart';
 import 'package:house_of_tomorrow/src/service/theme_service.dart';
 import 'package:house_of_tomorrow/theme/component/rating.dart';
+import 'package:house_of_tomorrow/util/helper/intl_helper.dart';
 
 class ProductCard extends StatelessWidget {
   const ProductCard({
@@ -57,7 +58,10 @@ class ProductCard extends StatelessWidget {
               /// Price
               Expanded(
                 child: Text(
-                  "${product.priceUnit}${product.price}",
+                  IntlHelper.currency(
+                    number: product.price,
+                    symbol: product.priceUnit,
+                  ),
                   style: context.typo.subtitle2,
                 ),
               ),
