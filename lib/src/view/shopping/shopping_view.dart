@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:house_of_tomorrow/src/model/product.dart';
 import 'package:house_of_tomorrow/src/view/shopping/widget/product_card_grid.dart';
+import 'package:house_of_tomorrow/src/view/shopping/widget/product_empty.dart';
 import 'package:house_of_tomorrow/theme/component/bottom_sheet/setting_bottom_sheet.dart';
 import 'package:house_of_tomorrow/theme/component/button/button.dart';
 import 'package:house_of_tomorrow/theme/component/input_field.dart';
@@ -86,7 +87,9 @@ class _ShoppingViewState extends State<ShoppingView> {
 
           /// ProductCardList
           Expanded(
-            child: ProductCardGrid(productList),
+            child: productList.isEmpty
+                ? const ProductEmpty()
+                : ProductCardGrid(productList),
           ),
         ],
       ),
