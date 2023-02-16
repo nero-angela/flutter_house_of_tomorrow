@@ -3,7 +3,7 @@ import 'package:house_of_tomorrow/src/model/product.dart';
 import 'package:house_of_tomorrow/theme/component/pop_button.dart';
 import 'package:house_of_tomorrow/util/lang/generated/l10n.dart';
 
-class ProductView extends StatelessWidget {
+class ProductView extends StatefulWidget {
   const ProductView({
     super.key,
     required this.product,
@@ -11,6 +11,11 @@ class ProductView extends StatelessWidget {
 
   final Product product;
 
+  @override
+  State<ProductView> createState() => _ProductViewState();
+}
+
+class _ProductViewState extends State<ProductView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
