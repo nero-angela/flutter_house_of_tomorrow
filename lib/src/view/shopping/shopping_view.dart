@@ -7,6 +7,7 @@ import 'package:house_of_tomorrow/src/view/shopping/widget/product_card_grid.dar
 import 'package:house_of_tomorrow/src/view/shopping/widget/product_empty.dart';
 import 'package:house_of_tomorrow/theme/component/bottom_sheet/setting_bottom_sheet.dart';
 import 'package:house_of_tomorrow/theme/component/button/button.dart';
+import 'package:house_of_tomorrow/theme/component/cart_button.dart';
 import 'package:house_of_tomorrow/theme/component/hide_keyboard.dart';
 import 'package:house_of_tomorrow/theme/component/input_field.dart';
 import 'package:house_of_tomorrow/util/helper/network_helper.dart';
@@ -76,6 +77,9 @@ class _ShoppingViewState extends State<ShoppingView> {
                 );
               },
             ),
+
+            /// 카트 버튼
+            const CartButton(),
           ],
         ),
         body: Column(

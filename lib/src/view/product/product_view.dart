@@ -3,6 +3,7 @@ import 'package:house_of_tomorrow/src/model/product.dart';
 import 'package:house_of_tomorrow/src/view/product/widget/product_bottom_sheet.dart';
 import 'package:house_of_tomorrow/src/view/product/widget/product_color_preview.dart';
 import 'package:house_of_tomorrow/src/view/product/widget/product_desc.dart';
+import 'package:house_of_tomorrow/theme/component/cart_button.dart';
 import 'package:house_of_tomorrow/theme/component/color_picker.dart';
 import 'package:house_of_tomorrow/theme/component/pop_button.dart';
 import 'package:house_of_tomorrow/util/lang/generated/l10n.dart';
@@ -47,6 +48,10 @@ class _ProductViewState extends State<ProductView> {
         title: Text(S.current.product),
         leading: const PopButton(),
         titleSpacing: 0,
+        actions: const [
+          /// 카트 버튼
+          CartButton(),
+        ],
       ),
       body: Column(
         children: [
