@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:house_of_tomorrow/src/model/product.dart';
+import 'package:house_of_tomorrow/theme/component/pop_button.dart';
 import 'package:house_of_tomorrow/util/lang/generated/l10n.dart';
 
 class ProductView extends StatelessWidget {
@@ -15,6 +16,8 @@ class ProductView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(S.current.product),
+        leading: const PopButton(),
+        titleSpacing: 0,
       ),
     );
   }
