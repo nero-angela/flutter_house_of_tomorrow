@@ -6,6 +6,11 @@ class CartService with ChangeNotifier {
   /// 상품 목록
   List<CartItem> cartItemList = const [];
 
+  /// 선택된 상품 목록
+  List<CartItem> get selectedCartItemList {
+    return cartItemList.where((cartItem) => cartItem.isSelected).toImmutable();
+  }
+
   /// 상품 추가
   void add(CartItem newCartItem) {
     cartItemList = [...cartItemList, newCartItem].toImmutable();
