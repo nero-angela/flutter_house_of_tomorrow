@@ -27,11 +27,15 @@ class ProductColorPreview extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           /// Image
-          ClipRRect(
-            borderRadius: BorderRadius.circular(24),
-            child: Image.network(
-              product.productColorList[colorIndex].imageUrl,
-              fit: BoxFit.cover,
+          AspectRatio(
+            aspectRatio: 1 / 0.8,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(24),
+              child: Image.network(
+                product.productColorList[colorIndex].imageUrl,
+                width: double.infinity,
+                fit: BoxFit.cover,
+              ),
             ),
           ),
 
