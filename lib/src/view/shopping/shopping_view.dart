@@ -20,6 +20,9 @@ class ShoppingView extends StatefulWidget {
 
 class _ShoppingViewState extends State<ShoppingView> {
   List<Product> productList = [];
+  final TextEditingController textController = TextEditingController();
+
+  String get keyword => textController.text.trim();
 
   Future<void> searchProductList() async {
     try {
@@ -30,6 +33,14 @@ class _ShoppingViewState extends State<ShoppingView> {
       setState(() {
         productList = jsonDecode(res.data).map<Product>((json) {
           return Product.fromJson(json);
+        }).where((product) {
+          /// 키워드가 비어있는 경우 모두 반환
+          if (keyword.isEmpty) return true;
+
+          /// name이나 brand에 키워드 포함 여부 확인
+          return "${product.name}${product.brand}"
+              .toLowerCase()
+              .contains(keyword.toLowerCase());
         }).toList();
       });
     } catch (e, s) {
@@ -77,6 +88,9 @@ class _ShoppingViewState extends State<ShoppingView> {
                 /// 검색
                 Expanded(
                   child: InputField(
+                    controller: textController,
+                    onClear: searchProductList,
+                    onSubmitted: (text) => searchProductList(),
                     hint: S.current.searchProduct,
                   ),
                 ),
