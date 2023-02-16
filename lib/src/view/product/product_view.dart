@@ -16,6 +16,26 @@ class ProductView extends StatefulWidget {
 }
 
 class _ProductViewState extends State<ProductView> {
+  /// 선택한 수량
+  int count = 1;
+
+  /// 선택한 색상
+  int colorIndex = 0;
+
+  /// 수량 업데이트 이벤트 함수
+  void onCountChanged(int newCount) {
+    setState(() {
+      count = newCount;
+    });
+  }
+
+  /// 색상 업데이트 이벤트 함수
+  void onColorIndexChanged(int newColorIndex) {
+    setState(() {
+      colorIndex = newColorIndex;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
