@@ -11,4 +11,12 @@ class CartService with ChangeNotifier {
     cartItemList = [...cartItemList, newCartItem].toImmutable();
     notifyListeners();
   }
+
+  /// 상품 수정
+  void update(int selectedIndex, CartItem newCartItem) {
+    cartItemList = cartItemList.asMap().entries.map((entry) {
+      return entry.key == selectedIndex ? newCartItem : entry.value;
+    }).toImmutable();
+    notifyListeners();
+  }
 }
