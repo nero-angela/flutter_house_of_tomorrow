@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:house_of_tomorrow/src/model/product.dart';
+import 'package:house_of_tomorrow/src/view/product/widget/product_bottom_sheet.dart';
 import 'package:house_of_tomorrow/src/view/product/widget/product_color_preview.dart';
 import 'package:house_of_tomorrow/src/view/product/widget/product_desc.dart';
 import 'package:house_of_tomorrow/theme/component/color_picker.dart';
@@ -47,31 +48,45 @@ class _ProductViewState extends State<ProductView> {
         leading: const PopButton(),
         titleSpacing: 0,
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(vertical: 32),
-        child: Wrap(
-          runSpacing: 32,
-          alignment: WrapAlignment.center,
-          children: [
-            /// ProductColorPreview
-            ProductColorPreview(
-              colorIndex: colorIndex,
-              product: widget.product,
-            ),
+      body: Column(
+        children: [
+          Expanded(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.symmetric(vertical: 32),
+              child: Wrap(
+                runSpacing: 32,
+                alignment: WrapAlignment.center,
+                children: [
+                  /// ProductColorPreview
+                  ProductColorPreview(
+                    colorIndex: colorIndex,
+                    product: widget.product,
+                  ),
 
-            /// ColorPicker
-            ColorPicker(
-              colorIndex: colorIndex,
-              colorList: widget.product.productColorList.map((e) {
-                return e.color;
-              }).toList(),
-              onColorSelected: onColorIndexChanged,
-            ),
+                  /// ColorPicker
+                  ColorPicker(
+                    colorIndex: colorIndex,
+                    colorList: widget.product.productColorList.map((e) {
+                      return e.color;
+                    }).toList(),
+                    onColorSelected: onColorIndexChanged,
+                  ),
 
-            /// ProductDesc
-            ProductDesc(product: widget.product),
-          ],
-        ),
+                  /// ProductDesc
+                  ProductDesc(product: widget.product),
+                ],
+              ),
+            ),
+          ),
+
+          /// ProductBottomSheet
+          ProductBottomSheet(
+            count: count,
+            product: widget.product,
+            onCountChanged: onCountChanged,
+            onAddToCartPressed: () {},
+          ),
+        ],
       ),
     );
   }
