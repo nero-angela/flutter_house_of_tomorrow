@@ -19,4 +19,12 @@ class CartService with ChangeNotifier {
     }).toImmutable();
     notifyListeners();
   }
+
+  /// 상품 목록 삭제
+  void delete(List<CartItem> deleteList) {
+    cartItemList = cartItemList.where((cartItem) {
+      return !deleteList.contains(cartItem);
+    }).toImmutable();
+    notifyListeners();
+  }
 }
