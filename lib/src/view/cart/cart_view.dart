@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:house_of_tomorrow/src/service/cart_service.dart';
+import 'package:house_of_tomorrow/src/service/theme_service.dart';
 import 'package:house_of_tomorrow/src/view/cart/widget/cart_bottom_sheet.dart';
+import 'package:house_of_tomorrow/src/view/cart/widget/cart_delete_dialog.dart';
 import 'package:house_of_tomorrow/src/view/cart/widget/cart_empty.dart';
 import 'package:house_of_tomorrow/src/view/cart/widget/cart_item_tile.dart';
+import 'package:house_of_tomorrow/theme/component/button/button.dart';
 import 'package:house_of_tomorrow/theme/component/pop_button.dart';
 import 'package:house_of_tomorrow/util/helper/intl_helper.dart';
 import 'package:house_of_tomorrow/util/lang/generated/l10n.dart';
@@ -19,6 +22,28 @@ class CartView extends StatelessWidget {
         title: Text(S.current.cart),
         leading: const PopButton(),
         titleSpacing: 0,
+        actions: [
+          /// Delete Button
+          Button(
+            onPressed: () {
+              /// Show delete dialog
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return CartDeleteDialog(
+                    onDeletePressed: () {
+                      cartService.delete(cartService.selectedCartItemList);
+                    },
+                  );
+                },
+              );
+            },
+            text: S.current.delete,
+            type: ButtonType.flat,
+            color: context.color.secondary,
+            isInactive: cartService.selectedCartItemList.isEmpty,
+          ),
+        ],
       ),
       body: Column(
         children: [
