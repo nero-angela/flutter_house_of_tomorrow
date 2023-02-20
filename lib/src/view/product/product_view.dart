@@ -8,6 +8,7 @@ import 'package:house_of_tomorrow/src/view/product/widget/product_desc.dart';
 import 'package:house_of_tomorrow/theme/component/cart_button.dart';
 import 'package:house_of_tomorrow/theme/component/color_picker.dart';
 import 'package:house_of_tomorrow/theme/component/pop_button.dart';
+import 'package:house_of_tomorrow/theme/component/toast/toast.dart';
 import 'package:house_of_tomorrow/util/lang/generated/l10n.dart';
 import 'package:provider/provider.dart';
 
@@ -54,6 +55,7 @@ class _ProductViewState extends State<ProductView> {
       product: widget.product,
     );
     cartService.add(newCartItem);
+    Toast.show(context, S.current.productAdded(widget.product.name));
   }
 
   @override
