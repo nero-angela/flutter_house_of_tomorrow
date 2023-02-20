@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:house_of_tomorrow/src/service/cart_service.dart';
 import 'package:house_of_tomorrow/src/service/theme_service.dart';
 import 'package:house_of_tomorrow/src/view/cart/widget/cart_bottom_sheet.dart';
+import 'package:house_of_tomorrow/src/view/cart/widget/cart_checkout_dialog.dart';
 import 'package:house_of_tomorrow/src/view/cart/widget/cart_delete_dialog.dart';
 import 'package:house_of_tomorrow/src/view/cart/widget/cart_empty.dart';
 import 'package:house_of_tomorrow/src/view/cart/widget/cart_item_tile.dart';
@@ -94,7 +95,19 @@ class CartView extends StatelessWidget {
                     }),
                   ),
             selectedCartItemList: cartService.selectedCartItemList,
-            onCheckoutPressed: () {},
+            onCheckoutPressed: () {
+              /// Show checkout dialog
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return CartCheckoutDialog(
+                    onCheckoutPressed: () {
+                      cartService.delete(cartService.selectedCartItemList);
+                    },
+                  );
+                },
+              );
+            },
           ),
         ],
       ),
