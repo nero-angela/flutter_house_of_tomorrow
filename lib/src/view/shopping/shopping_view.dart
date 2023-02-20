@@ -18,16 +18,18 @@ class ShoppingView extends StatefulWidget {
 }
 
 class _ShoppingViewState extends State<ShoppingView> {
+  final ShoppingViewModel shoppingViewModel = ShoppingViewModel();
+
   @override
   void initState() {
     super.initState();
-    // searchProductList();
+    shoppingViewModel.searchProductList();
   }
 
   @override
   Widget build(BuildContext context) {
     return BaseView(
-      viewModel: ShoppingViewModel(),
+      viewModel: shoppingViewModel,
       builder: (context, viewModel) => HideKeyboard(
         child: Scaffold(
           appBar: AppBar(
