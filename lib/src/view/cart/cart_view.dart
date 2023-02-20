@@ -23,7 +23,9 @@ class CartView extends StatelessWidget {
   Widget build(BuildContext context) {
     final CartService cartService = context.watch();
     return BaseView(
-      viewModel: CartViewModel(),
+      viewModel: CartViewModel(
+        cartService: context.read(),
+      ),
       builder: (context, viewModel) => Scaffold(
         appBar: AppBar(
           title: Text(S.current.cart),
