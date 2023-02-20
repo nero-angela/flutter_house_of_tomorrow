@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:house_of_tomorrow/src/model/cart_item.dart';
 import 'package:house_of_tomorrow/src/model/product.dart';
 import 'package:house_of_tomorrow/src/service/cart_service.dart';
+import 'package:house_of_tomorrow/src/view/base_view.dart';
+import 'package:house_of_tomorrow/src/view/product/product_view_model.dart';
 import 'package:house_of_tomorrow/src/view/product/widget/product_color_preview.dart';
 import 'package:house_of_tomorrow/src/view/product/widget/product_desc.dart';
 import 'package:house_of_tomorrow/src/view/product/widget/product_layout.dart';
@@ -62,50 +64,53 @@ class _ProductViewState extends State<ProductView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(S.current.product),
-        leading: const PopButton(),
-        titleSpacing: 0,
-        actions: const [
-          /// 카트 버튼
-          CartButton(),
-        ],
-      ),
-      body: ProductLayout(
-        productInfo: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(vertical: 32),
-          child: Wrap(
-            runSpacing: 32,
-            alignment: WrapAlignment.center,
-            children: [
-              /// ProductColorPreview
-              ProductColorPreview(
-                colorIndex: colorIndex,
-                product: widget.product,
-              ),
-
-              /// ColorPicker
-              ColorPicker(
-                colorIndex: colorIndex,
-                colorList: widget.product.productColorList.map((e) {
-                  return e.color;
-                }).toList(),
-                onColorSelected: onColorIndexChanged,
-              ),
-
-              /// ProductDesc
-              ProductDesc(product: widget.product),
-            ],
-          ),
+    return BaseView(
+      viewModel: ProductViewModel(),
+      builder: (context, viewModel) => Scaffold(
+        appBar: AppBar(
+          title: Text(S.current.product),
+          leading: const PopButton(),
+          titleSpacing: 0,
+          actions: const [
+            /// 카트 버튼
+            CartButton(),
+          ],
         ),
+        body: ProductLayout(
+          productInfo: SingleChildScrollView(
+            padding: const EdgeInsets.symmetric(vertical: 32),
+            child: Wrap(
+              runSpacing: 32,
+              alignment: WrapAlignment.center,
+              children: [
+                /// ProductColorPreview
+                ProductColorPreview(
+                  colorIndex: colorIndex,
+                  product: widget.product,
+                ),
 
-        /// ProductBottomSheet
-        productBottomSheet: ProductBottomSheet(
-          count: count,
-          product: widget.product,
-          onCountChanged: onCountChanged,
-          onAddToCartPressed: onAddToCartPressed,
+                /// ColorPicker
+                ColorPicker(
+                  colorIndex: colorIndex,
+                  colorList: widget.product.productColorList.map((e) {
+                    return e.color;
+                  }).toList(),
+                  onColorSelected: onColorIndexChanged,
+                ),
+
+                /// ProductDesc
+                ProductDesc(product: widget.product),
+              ],
+            ),
+          ),
+
+          /// ProductBottomSheet
+          productBottomSheet: ProductBottomSheet(
+            count: count,
+            product: widget.product,
+            onCountChanged: onCountChanged,
+            onAddToCartPressed: onAddToCartPressed,
+          ),
         ),
       ),
     );
