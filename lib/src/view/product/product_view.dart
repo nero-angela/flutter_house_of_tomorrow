@@ -2,15 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:house_of_tomorrow/src/model/cart_item.dart';
 import 'package:house_of_tomorrow/src/model/product.dart';
 import 'package:house_of_tomorrow/src/service/cart_service.dart';
-import 'package:house_of_tomorrow/src/view/product/widget/product_bottom_sheet.dart';
 import 'package:house_of_tomorrow/src/view/product/widget/product_color_preview.dart';
 import 'package:house_of_tomorrow/src/view/product/widget/product_desc.dart';
+import 'package:house_of_tomorrow/src/view/product/widget/product_layout.dart';
 import 'package:house_of_tomorrow/theme/component/cart_button.dart';
 import 'package:house_of_tomorrow/theme/component/color_picker.dart';
 import 'package:house_of_tomorrow/theme/component/pop_button.dart';
 import 'package:house_of_tomorrow/theme/component/toast/toast.dart';
 import 'package:house_of_tomorrow/util/lang/generated/l10n.dart';
 import 'package:provider/provider.dart';
+
+import 'widget/product_bottom_sheet.dart';
 
 class ProductView extends StatefulWidget {
   const ProductView({
@@ -70,45 +72,41 @@ class _ProductViewState extends State<ProductView> {
           CartButton(),
         ],
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.symmetric(vertical: 32),
-              child: Wrap(
-                runSpacing: 32,
-                alignment: WrapAlignment.center,
-                children: [
-                  /// ProductColorPreview
-                  ProductColorPreview(
-                    colorIndex: colorIndex,
-                    product: widget.product,
-                  ),
-
-                  /// ColorPicker
-                  ColorPicker(
-                    colorIndex: colorIndex,
-                    colorList: widget.product.productColorList.map((e) {
-                      return e.color;
-                    }).toList(),
-                    onColorSelected: onColorIndexChanged,
-                  ),
-
-                  /// ProductDesc
-                  ProductDesc(product: widget.product),
-                ],
+      body: ProductLayout(
+        productInfo: SingleChildScrollView(
+          padding: const EdgeInsets.symmetric(vertical: 32),
+          child: Wrap(
+            runSpacing: 32,
+            alignment: WrapAlignment.center,
+            children: [
+              /// ProductColorPreview
+              ProductColorPreview(
+                colorIndex: colorIndex,
+                product: widget.product,
               ),
-            ),
-          ),
 
-          /// ProductBottomSheet
-          ProductBottomSheet(
-            count: count,
-            product: widget.product,
-            onCountChanged: onCountChanged,
-            onAddToCartPressed: onAddToCartPressed,
+              /// ColorPicker
+              ColorPicker(
+                colorIndex: colorIndex,
+                colorList: widget.product.productColorList.map((e) {
+                  return e.color;
+                }).toList(),
+                onColorSelected: onColorIndexChanged,
+              ),
+
+              /// ProductDesc
+              ProductDesc(product: widget.product),
+            ],
           ),
-        ],
+        ),
+
+        /// ProductBottomSheet
+        productBottomSheet: ProductBottomSheet(
+          count: count,
+          product: widget.product,
+          onCountChanged: onCountChanged,
+          onAddToCartPressed: onAddToCartPressed,
+        ),
       ),
     );
   }
