@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:house_of_tomorrow/theme/dark_theme.dart';
 import 'package:house_of_tomorrow/theme/foundation/app_theme.dart';
 import 'package:house_of_tomorrow/theme/light_theme.dart';
+import 'package:house_of_tomorrow/theme/res/layout.dart';
 import 'package:provider/provider.dart';
 
 class ThemeService with ChangeNotifier {
@@ -44,6 +45,9 @@ class ThemeService with ChangeNotifier {
       /// BottomSheet
       bottomSheetTheme: const BottomSheetThemeData(
         backgroundColor: Colors.transparent,
+        constraints: BoxConstraints(
+          maxWidth: Breakpoints.bottomSheet,
+        ),
       ),
     );
   }
