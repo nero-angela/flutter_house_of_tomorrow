@@ -11,11 +11,13 @@ class ConstrainedScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ConstrainedBox(
-      constraints: const BoxConstraints(
-        maxWidth: Breakpoints.desktop,
+    return Center(
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(
+          maxWidth: Breakpoints.desktop,
+        ),
+        child: child,
       ),
-      child: child,
     );
   }
 }
