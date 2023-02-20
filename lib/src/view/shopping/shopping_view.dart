@@ -3,6 +3,8 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:house_of_tomorrow/src/model/product.dart';
+import 'package:house_of_tomorrow/src/view/base_view.dart';
+import 'package:house_of_tomorrow/src/view/shopping/shopping_view_model.dart';
 import 'package:house_of_tomorrow/src/view/shopping/widget/product_card_grid.dart';
 import 'package:house_of_tomorrow/src/view/shopping/widget/product_empty.dart';
 import 'package:house_of_tomorrow/theme/component/bottom_sheet/setting_bottom_sheet.dart';
@@ -58,66 +60,69 @@ class _ShoppingViewState extends State<ShoppingView> {
 
   @override
   Widget build(BuildContext context) {
-    return HideKeyboard(
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(S.current.shopping),
-          actions: [
-            /// 설정 버튼
-            Button(
-              icon: 'option',
-              type: ButtonType.flat,
-              onPressed: () {
-                showModalBottomSheet(
-                  context: context,
-                  isScrollControlled: true,
-                  builder: (context) {
-                    return const SettingBottomSheet();
-                  },
-                );
-              },
-            ),
-
-            /// 카트 버튼
-            const CartButton(),
-          ],
-        ),
-        body: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 16,
-                vertical: 8,
+    return BaseView(
+      viewModel: ShoppingViewModel(),
+      builder: (context, viewModel) => HideKeyboard(
+        child: Scaffold(
+          appBar: AppBar(
+            title: Text(S.current.shopping),
+            actions: [
+              /// 설정 버튼
+              Button(
+                icon: 'option',
+                type: ButtonType.flat,
+                onPressed: () {
+                  showModalBottomSheet(
+                    context: context,
+                    isScrollControlled: true,
+                    builder: (context) {
+                      return const SettingBottomSheet();
+                    },
+                  );
+                },
               ),
-              child: Row(
-                children: [
-                  /// 검색
-                  Expanded(
-                    child: InputField(
-                      controller: textController,
-                      onClear: searchProductList,
-                      onSubmitted: (text) => searchProductList(),
-                      hint: S.current.searchProduct,
+
+              /// 카트 버튼
+              const CartButton(),
+            ],
+          ),
+          body: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 8,
+                ),
+                child: Row(
+                  children: [
+                    /// 검색
+                    Expanded(
+                      child: InputField(
+                        controller: textController,
+                        onClear: searchProductList,
+                        onSubmitted: (text) => searchProductList(),
+                        hint: S.current.searchProduct,
+                      ),
                     ),
-                  ),
-                  const SizedBox(width: 16),
+                    const SizedBox(width: 16),
 
-                  /// 검색 버튼
-                  Button(
-                    icon: 'search',
-                    onPressed: searchProductList,
-                  ),
-                ],
+                    /// 검색 버튼
+                    Button(
+                      icon: 'search',
+                      onPressed: searchProductList,
+                    ),
+                  ],
+                ),
               ),
-            ),
 
-            /// ProductCardList
-            Expanded(
-              child: productList.isEmpty
-                  ? const ProductEmpty()
-                  : ProductCardGrid(productList),
-            ),
-          ],
+              /// ProductCardList
+              Expanded(
+                child: productList.isEmpty
+                    ? const ProductEmpty()
+                    : ProductCardGrid(productList),
+              ),
+            ],
+          ),
         ),
       ),
     );
