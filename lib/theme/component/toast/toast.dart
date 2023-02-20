@@ -8,15 +8,19 @@ abstract class Toast {
     Duration duration = const Duration(seconds: 3),
   }) async {
     /// Insert
+    GlobalKey<ToastBuilderState> toastKey = GlobalKey();
     final overlay = Overlay.of(context);
     const animDuration = Duration(milliseconds: 333);
     final toast = OverlayEntry(
       builder: (context) => ToastBuilder(
+        key: toastKey,
         text: text,
         animDuration: animDuration,
       ),
     );
     overlay.insert(toast);
+    print(toastKey.currentState?.isShow);
+    toastKey.currentState?.isShow = true;
 
     /// Remove
     await Future.delayed(duration);

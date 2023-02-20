@@ -12,10 +12,10 @@ class ToastBuilder extends StatefulWidget {
   final Duration animDuration;
 
   @override
-  State<ToastBuilder> createState() => _ToastBuilderState();
+  State<ToastBuilder> createState() => ToastBuilderState();
 }
 
-class _ToastBuilderState extends State<ToastBuilder> {
+class ToastBuilderState extends State<ToastBuilder> {
   bool _isShow = false;
 
   bool get isShow => _isShow;
