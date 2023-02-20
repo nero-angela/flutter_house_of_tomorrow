@@ -19,15 +19,14 @@ abstract class Toast {
       ),
     );
     overlay.insert(toast);
-    print("1 : ${toastKey.currentState?.isShow}");
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      print("2 : ${toastKey.currentState?.isShow}");
       toastKey.currentState?.isShow = true;
     });
-    print("3 : ${toastKey.currentState?.isShow}");
 
     /// Remove
     await Future.delayed(duration);
+    toastKey.currentState?.isShow = false;
+    await Future.delayed(animDuration);
     toast.remove();
   }
 }
