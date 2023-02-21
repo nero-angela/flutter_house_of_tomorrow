@@ -9,6 +9,7 @@ import 'package:house_of_tomorrow/theme/component/cart_button.dart';
 import 'package:house_of_tomorrow/theme/component/hide_keyboard.dart';
 import 'package:house_of_tomorrow/theme/component/input_field.dart';
 import 'package:house_of_tomorrow/util/lang/generated/l10n.dart';
+import 'package:provider/provider.dart';
 
 class ShoppingView extends StatefulWidget {
   const ShoppingView({super.key});
@@ -18,7 +19,9 @@ class ShoppingView extends StatefulWidget {
 }
 
 class _ShoppingViewState extends State<ShoppingView> {
-  final ShoppingViewModel shoppingViewModel = ShoppingViewModel();
+  late final ShoppingViewModel shoppingViewModel = ShoppingViewModel(
+    productRepository: context.read(),
+  );
 
   @override
   void initState() {
