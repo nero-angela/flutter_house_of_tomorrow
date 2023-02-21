@@ -19,7 +19,15 @@ void main() {
     });
 
     group('selectedCartItemList', () {
-      test('isSelected가 true인 CartItem만 반환한다.', () {});
+      test('isSelected가 true인 CartItem만 반환한다.', () {
+        cartService.add(Dummy.cartItem.copyWith(isSelected: true));
+        cartService.add(Dummy.cartItem.copyWith(isSelected: true));
+        cartService.add(Dummy.cartItem.copyWith(isSelected: false));
+        expect(cartService.selectedCartItemList.length, 2);
+        for (final cartItem in cartService.selectedCartItemList) {
+          expect(cartItem.isSelected, true);
+        }
+      });
     });
 
     group('update()', () {
