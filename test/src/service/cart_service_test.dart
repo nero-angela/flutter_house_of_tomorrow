@@ -1,6 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:house_of_tomorrow/src/service/cart_service.dart';
 
+import '../../dummy.dart';
+
 void main() {
   late CartService cartService;
 
@@ -10,7 +12,10 @@ void main() {
 
   group('CartService', () {
     group('add()', () {
-      test('신규 CartItem을 cartItemList에 추가한다.', () {});
+      test('신규 CartItem을 cartItemList에 추가한다.', () {
+        cartService.add(Dummy.cartItem);
+        expect(cartService.cartItemList.length, 2);
+      });
     });
 
     group('selectedCartItemList', () {
