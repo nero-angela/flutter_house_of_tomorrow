@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:house_of_tomorrow/src/service/cart_service.dart';
 import 'package:house_of_tomorrow/src/service/theme_service.dart';
+import 'package:house_of_tomorrow/src/view/base_view.dart';
+import 'package:house_of_tomorrow/src/view/cart/cart_view_model.dart';
 import 'package:house_of_tomorrow/src/view/cart/widget/cart_bottom_sheet.dart';
 import 'package:house_of_tomorrow/src/view/cart/widget/cart_checkout_dialog.dart';
 import 'package:house_of_tomorrow/src/view/cart/widget/cart_delete_dialog.dart';
@@ -20,92 +22,95 @@ class CartView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final CartService cartService = context.watch();
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(S.current.cart),
-        leading: const PopButton(),
-        titleSpacing: 0,
-        actions: [
-          /// Delete Button
-          Button(
-            onPressed: () {
-              /// Show delete dialog
+    return BaseView(
+      viewModel: CartViewModel(),
+      builder: (context, viewModel) => Scaffold(
+        appBar: AppBar(
+          title: Text(S.current.cart),
+          leading: const PopButton(),
+          titleSpacing: 0,
+          actions: [
+            /// Delete Button
+            Button(
+              onPressed: () {
+                /// Show delete dialog
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return CartDeleteDialog(
+                      onDeletePressed: () {
+                        cartService.delete(cartService.selectedCartItemList);
+                        Toast.show(S.current.deleteDialogSuccessToast);
+                      },
+                    );
+                  },
+                );
+              },
+              text: S.current.delete,
+              type: ButtonType.flat,
+              color: context.color.secondary,
+              isInactive: cartService.selectedCartItemList.isEmpty,
+            ),
+          ],
+        ),
+        body: CartLayout(
+          /// CartItemList
+          cartItemList: cartService.cartItemList.isEmpty
+              ? const CartEmpty()
+              : ListView.builder(
+                  itemCount: cartService.cartItemList.length,
+                  itemBuilder: (context, index) {
+                    final cartItem = cartService.cartItemList[index];
+                    return CartItemTile(
+                      cartItem: cartItem,
+                      onPressed: () {
+                        cartService.update(
+                          index,
+                          cartItem.copyWith(
+                            isSelected: !cartItem.isSelected,
+                          ),
+                        );
+                      },
+                      onCountChanged: (count) {
+                        cartService.update(
+                          index,
+                          cartItem.copyWith(
+                            count: count,
+                          ),
+                        );
+                      },
+                    );
+                  },
+                ),
+
+          /// CartBottomSheet
+          cartBottomSheet: CartBottomSheet(
+            totalPrice: cartService.selectedCartItemList.isEmpty
+                ? '0'
+                : IntlHelper.currency(
+                    symbol: cartService
+                        .selectedCartItemList.first.product.priceUnit,
+                    number:
+                        cartService.selectedCartItemList.fold(0, (prev, curr) {
+                      return prev + curr.count * curr.product.price;
+                    }),
+                  ),
+            selectedCartItemList: cartService.selectedCartItemList,
+            onCheckoutPressed: () {
+              /// Show checkout dialog
               showDialog(
                 context: context,
                 builder: (context) {
-                  return CartDeleteDialog(
-                    onDeletePressed: () {
+                  return CartCheckoutDialog(
+                    onCheckoutPressed: () {
                       cartService.delete(cartService.selectedCartItemList);
-                      Toast.show(S.current.deleteDialogSuccessToast);
+                      Toast.show(S.current.checkoutDialogSuccessToast);
                     },
                   );
                 },
               );
             },
-            text: S.current.delete,
-            type: ButtonType.flat,
-            color: context.color.secondary,
-            isInactive: cartService.selectedCartItemList.isEmpty,
           ),
-        ],
-      ),
-      body: CartLayout(
-        /// CartItemList
-        cartItemList: cartService.cartItemList.isEmpty
-            ? const CartEmpty()
-            : ListView.builder(
-                itemCount: cartService.cartItemList.length,
-                itemBuilder: (context, index) {
-                  final cartItem = cartService.cartItemList[index];
-                  return CartItemTile(
-                    cartItem: cartItem,
-                    onPressed: () {
-                      cartService.update(
-                        index,
-                        cartItem.copyWith(
-                          isSelected: !cartItem.isSelected,
-                        ),
-                      );
-                    },
-                    onCountChanged: (count) {
-                      cartService.update(
-                        index,
-                        cartItem.copyWith(
-                          count: count,
-                        ),
-                      );
-                    },
-                  );
-                },
-              ),
-
-        /// CartBottomSheet
-        cartBottomSheet: CartBottomSheet(
-          totalPrice: cartService.selectedCartItemList.isEmpty
-              ? '0'
-              : IntlHelper.currency(
-                  symbol:
-                      cartService.selectedCartItemList.first.product.priceUnit,
-                  number:
-                      cartService.selectedCartItemList.fold(0, (prev, curr) {
-                    return prev + curr.count * curr.product.price;
-                  }),
-                ),
-          selectedCartItemList: cartService.selectedCartItemList,
-          onCheckoutPressed: () {
-            /// Show checkout dialog
-            showDialog(
-              context: context,
-              builder: (context) {
-                return CartCheckoutDialog(
-                  onCheckoutPressed: () {
-                    cartService.delete(cartService.selectedCartItemList);
-                    Toast.show(S.current.checkoutDialogSuccessToast);
-                  },
-                );
-              },
-            );
-          },
         ),
       ),
     );
