@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:house_of_tomorrow/src/repository/product_repository.dart';
 import 'package:house_of_tomorrow/src/service/cart_service.dart';
 import 'package:house_of_tomorrow/src/service/lang_service.dart';
 import 'package:house_of_tomorrow/src/service/theme_service.dart';
@@ -11,6 +12,9 @@ void main() {
   runApp(
     MultiProvider(
       providers: [
+        Provider(
+          create: (context) => ProductRepository(),
+        ),
         ChangeNotifierProvider(
           create: (context) => ThemeService(),
         ),
