@@ -43,7 +43,25 @@ void main() {
         expect(results.isEmpty, true);
       });
 
-      test('이름이나 브랜드에 해당 키워드가 포함된 Product만 반환한다.', () async {});
+      test('이름이나 브랜드에 해당 키워드가 포함된 Product만 반환한다.', () async {
+        when(dio.get(productRepository.searchProductListUrl)).thenAnswer(
+          (realInvocation) async => Response(
+            data: Dummy.jsonProductList,
+            statusCode: 200,
+            requestOptions: RequestOptions(),
+          ),
+        );
+        const String keyword = "3";
+        final results = await productRepository.searchProductList(keyword);
+        for (final result in results) {
+          expect(
+            "${result.name}${result.brand}"
+                .toLowerCase()
+                .contains(keyword.toLowerCase()),
+            true,
+          );
+        }
+      });
     });
   });
 }
