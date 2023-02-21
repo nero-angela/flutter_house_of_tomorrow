@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:house_of_tomorrow/src/model/cart_item.dart';
 import 'package:house_of_tomorrow/src/service/cart_service.dart';
 
 import '../../dummy.dart';
@@ -31,7 +32,14 @@ void main() {
     });
 
     group('update()', () {
-      test('선택한 index의 CartItem을 수정한다.', () {});
+      test('선택한 index의 CartItem을 수정한다.', () {
+        cartService.add(Dummy.cartItem);
+        CartItem newCartItem = Dummy.cartItem.copyWith(
+          count: 100,
+        );
+        cartService.update(0, newCartItem);
+        expect(cartService.cartItemList[0], newCartItem);
+      });
     });
 
     group('delete()', () {
