@@ -43,7 +43,17 @@ void main() {
     });
 
     group('delete()', () {
-      test('deleteList에 포함된 cartItemList의 CartItem을 삭제한다.', () {});
+      test('deleteList에 포함된 cartItemList의 CartItem을 삭제한다.', () {
+        cartService.add(Dummy.cartItem.copyWith(isSelected: true));
+        cartService.add(Dummy.cartItem.copyWith(isSelected: true));
+        cartService.add(Dummy.cartItem.copyWith(isSelected: false));
+        cartService.add(Dummy.cartItem.copyWith(isSelected: false));
+        cartService.delete(cartService.selectedCartItemList);
+        expect(cartService.cartItemList.length, 2);
+        for (final cartItem in cartService.cartItemList) {
+          expect(cartItem.isSelected, false);
+        }
+      });
     });
   });
 }
