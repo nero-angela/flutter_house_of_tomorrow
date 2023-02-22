@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:house_of_tomorrow/src/service/theme_service.dart';
-import 'package:house_of_tomorrow/theme/res/layout.dart';
+import 'package:flutter_design_system/flutter_design_system.dart';
 
 class CartLayout extends StatelessWidget {
   const CartLayout({

@@ -2,16 +2,16 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_design_system/flutter_design_system.dart';
 import 'package:house_of_tomorrow/src/model/product.dart';
+import 'package:house_of_tomorrow/src/service/cart_service.dart';
 import 'package:house_of_tomorrow/src/view/shopping/widget/product_card_grid.dart';
 import 'package:house_of_tomorrow/src/view/shopping/widget/product_empty.dart';
-import 'package:house_of_tomorrow/theme/component/bottom_sheet/setting_bottom_sheet.dart';
-import 'package:house_of_tomorrow/theme/component/button/button.dart';
-import 'package:house_of_tomorrow/theme/component/cart_button.dart';
-import 'package:house_of_tomorrow/theme/component/hide_keyboard.dart';
-import 'package:house_of_tomorrow/theme/component/input_field.dart';
+import 'package:house_of_tomorrow/src/view/shopping/widget/setting_bottom_sheet.dart';
 import 'package:house_of_tomorrow/util/helper/network_helper.dart';
 import 'package:house_of_tomorrow/util/lang/generated/l10n.dart';
+import 'package:house_of_tomorrow/util/route_path.dart';
+import 'package:provider/provider.dart';
 
 class ShoppingView extends StatefulWidget {
   const ShoppingView({super.key});
@@ -79,7 +79,12 @@ class _ShoppingViewState extends State<ShoppingView> {
             ),
 
             /// 카트 버튼
-            const CartButton(),
+            CartButton(
+              count: context.watch<CartService>().cartItemList.length,
+              onPressed: () {
+                Navigator.pushNamed(context, RoutePath.cart);
+              },
+            ),
           ],
         ),
         body: Column(

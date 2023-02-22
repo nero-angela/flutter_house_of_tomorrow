@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_design_system/flutter_design_system.dart';
 import 'package:house_of_tomorrow/src/service/lang_service.dart';
-import 'package:house_of_tomorrow/src/service/theme_service.dart';
-import 'package:house_of_tomorrow/theme/component/bottom_sheet/base_bottom_sheet.dart';
-import 'package:house_of_tomorrow/theme/component/tile.dart';
 import 'package:house_of_tomorrow/util/helper/intl_helper.dart';
 import 'package:house_of_tomorrow/util/lang/generated/l10n.dart';
 import 'package:provider/provider.dart';

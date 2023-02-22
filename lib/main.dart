@@ -1,27 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_design_system/flutter_design_system.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:house_of_tomorrow/src/service/cart_service.dart';
 import 'package:house_of_tomorrow/src/service/lang_service.dart';
-import 'package:house_of_tomorrow/src/service/theme_service.dart';
 import 'package:house_of_tomorrow/util/lang/generated/l10n.dart';
 import 'package:house_of_tomorrow/util/route_path.dart';
 import 'package:provider/provider.dart';
 
 void main() {
   runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider(
-          create: (context) => ThemeService(),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => LangService(),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => CartService(),
-        ),
-      ],
-      child: const MyApp(),
+    ThemeInjector(
+      child: MultiProvider(
+        providers: [
+          ChangeNotifierProvider(
+            create: (context) => LangService(),
+          ),
+          ChangeNotifierProvider(
+            create: (context) => CartService(),
+          ),
+        ],
+        child: const MyApp(),
+      ),
     ),
   );
 }
@@ -35,13 +34,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       navigatorKey: navigatorKey,
-      builder: (context, child) {
-        return Overlay(
-          initialEntries: [
-            OverlayEntry(builder: (context) => child!),
-          ],
-        );
-      },
+      builder: (context, child) => Toast.init(navigatorKey, child),
       debugShowCheckedModeBanner: false,
       localizationsDelegates: const [
         S.delegate,

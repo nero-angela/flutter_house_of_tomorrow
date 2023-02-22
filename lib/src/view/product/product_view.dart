@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_design_system/flutter_design_system.dart';
 import 'package:house_of_tomorrow/src/model/cart_item.dart';
 import 'package:house_of_tomorrow/src/model/product.dart';
 import 'package:house_of_tomorrow/src/service/cart_service.dart';
 import 'package:house_of_tomorrow/src/view/product/widget/product_color_preview.dart';
 import 'package:house_of_tomorrow/src/view/product/widget/product_desc.dart';
 import 'package:house_of_tomorrow/src/view/product/widget/product_layout.dart';
-import 'package:house_of_tomorrow/theme/component/cart_button.dart';
-import 'package:house_of_tomorrow/theme/component/color_picker.dart';
-import 'package:house_of_tomorrow/theme/component/pop_button.dart';
-import 'package:house_of_tomorrow/theme/component/toast/toast.dart';
 import 'package:house_of_tomorrow/util/lang/generated/l10n.dart';
+import 'package:house_of_tomorrow/util/route_path.dart';
 import 'package:provider/provider.dart';
 
 import 'widget/product_bottom_sheet.dart';
@@ -67,9 +65,14 @@ class _ProductViewState extends State<ProductView> {
         title: Text(S.current.product),
         leading: const PopButton(),
         titleSpacing: 0,
-        actions: const [
+        actions: [
           /// 카트 버튼
-          CartButton(),
+          CartButton(
+            count: context.watch<CartService>().cartItemList.length,
+            onPressed: () {
+              Navigator.pushNamed(context, RoutePath.cart);
+            },
+          ),
         ],
       ),
       body: ProductLayout(
