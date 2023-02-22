@@ -5,9 +5,11 @@ class ToastBuilder extends StatefulWidget {
   const ToastBuilder({
     super.key,
     required this.text,
+    required this.animDuration,
   });
 
   final String text;
+  final Duration animDuration;
 
   @override
   State<ToastBuilder> createState() => _ToastBuilderState();
@@ -32,20 +34,24 @@ class _ToastBuilderState extends State<ToastBuilder> {
       left: 0,
       right: 0,
       child: Center(
-        child: Container(
-          decoration: BoxDecoration(
-            color: context.color.toastContainer,
-            borderRadius: BorderRadius.circular(16),
-          ),
-          padding: const EdgeInsets.symmetric(
-            vertical: 8,
-            horizontal: 16,
-          ),
-          child: DefaultTextStyle(
-            style: context.typo.headline6.copyWith(
-              color: context.color.onToastContainer,
+        child: AnimatedOpacity(
+          duration: widget.animDuration,
+          opacity: isShow ? 1 : 0,
+          child: Container(
+            decoration: BoxDecoration(
+              color: context.color.toastContainer,
+              borderRadius: BorderRadius.circular(16),
             ),
-            child: Text(widget.text),
+            padding: const EdgeInsets.symmetric(
+              vertical: 8,
+              horizontal: 16,
+            ),
+            child: DefaultTextStyle(
+              style: context.typo.headline6.copyWith(
+                color: context.color.onToastContainer,
+              ),
+              child: Text(widget.text),
+            ),
           ),
         ),
       ),

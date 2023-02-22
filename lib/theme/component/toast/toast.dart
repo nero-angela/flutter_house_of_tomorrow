@@ -9,9 +9,11 @@ abstract class Toast {
   }) async {
     /// Insert
     final overlay = Overlay.of(context);
+    const animDuration = Duration(milliseconds: 333);
     final toast = OverlayEntry(
       builder: (context) => ToastBuilder(
         text: text,
+        animDuration: animDuration,
       ),
     );
     overlay.insert(toast);
