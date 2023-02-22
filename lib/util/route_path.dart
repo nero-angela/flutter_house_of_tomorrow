@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_design_system/flutter_design_system.dart';
 import 'package:house_of_tomorrow/src/model/product.dart';
 import 'package:house_of_tomorrow/src/view/cart/cart_view.dart';
 import 'package:house_of_tomorrow/src/view/product/product_view.dart';
 import 'package:house_of_tomorrow/src/view/shopping/shopping_view.dart';
-import 'package:house_of_tomorrow/theme/component/constrained_screen.dart';
 
 abstract class RoutePath {
   static const String shopping = 'shopping';

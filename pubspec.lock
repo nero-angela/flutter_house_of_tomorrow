@@ -150,6 +150,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.4.1"
+  flutter_design_system:
+    dependency: "direct main"
+    description:
+      name: flutter_design_system
+      sha256: da93fc471e118a45156182c4d0c2530db8f7467455548390092986f6d99c20f2
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.2"
   flutter_lints:
     dependency: "direct dev"
     description:
