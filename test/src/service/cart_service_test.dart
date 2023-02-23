@@ -14,7 +14,7 @@ void main() {
     group('add()', () {
       test('신규 CartItem을 cartItemList에 추가한다.', () {
         cartService.add(Dummy.cartItem);
-        expect(cartService.cartItemList.length, 2);
+        expect(cartService.cartItemList.length, 1);
       });
     });
 
