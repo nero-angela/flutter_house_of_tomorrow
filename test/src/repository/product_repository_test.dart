@@ -2,7 +2,9 @@ import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:house_of_tomorrow/src/repository/product_repository.dart';
 import 'package:mockito/annotations.dart';
+import 'package:mockito/mockito.dart';
 
+import '../../dummy.dart';
 import 'product_repository_test.mocks.dart';
 
 @GenerateNiceMocks([MockSpec<Dio>()])
@@ -17,7 +19,17 @@ void main() {
 
   group('ProductRepository', () {
     group('searchProductList()', () {
-      test('통신 성공시 List<Product>를 반환한다.', () async {});
+      test('통신 성공시 List<Product>를 반환한다.', () async {
+        when(dio.get(productRepository.searchProductListUrl)).thenAnswer(
+          (realInvocation) async => Response(
+            data: Dummy.jsonProductList,
+            statusCode: 200,
+            requestOptions: RequestOptions(),
+          ),
+        );
+        final results = await productRepository.searchProductList('');
+        expect(results.isNotEmpty, true);
+      });
 
       test('통신 실패시 빈 배열을 반환한다.', () async {});
 
