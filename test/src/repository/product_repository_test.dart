@@ -3,12 +3,16 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:house_of_tomorrow/src/repository/product_repository.dart';
 import 'package:mockito/annotations.dart';
 
+import 'product_repository_test.mocks.dart';
+
 @GenerateNiceMocks([MockSpec<Dio>()])
 void main() {
+  late MockDio dio;
   late ProductRepository productRepository;
 
   setUp(() {
-    productRepository = ProductRepository();
+    dio = MockDio();
+    productRepository = ProductRepository(dio: dio);
   });
 
   group('ProductRepository', () {
