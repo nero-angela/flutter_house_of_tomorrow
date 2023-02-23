@@ -31,7 +31,17 @@ void main() {
         expect(results.isNotEmpty, true);
       });
 
-      test('통신 실패시 빈 배열을 반환한다.', () async {});
+      test('통신 실패시 빈 배열을 반환한다.', () async {
+        when(dio.get(productRepository.searchProductListUrl)).thenAnswer(
+          (realInvocation) async => Response(
+            data: '',
+            statusCode: 500,
+            requestOptions: RequestOptions(),
+          ),
+        );
+        final results = await productRepository.searchProductList('');
+        expect(results.isEmpty, true);
+      });
 
       test('이름이나 브랜드에 해당 키워드가 포함된 Product만 반환한다.', () async {});
     });
