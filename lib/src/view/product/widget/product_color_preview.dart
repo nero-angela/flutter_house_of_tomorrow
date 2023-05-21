@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:house_of_tomorrow/src/model/product.dart';
 import 'package:house_of_tomorrow/src/service/theme_service.dart';
@@ -31,8 +32,8 @@ class ProductColorPreview extends StatelessWidget {
             aspectRatio: 1 / 0.8,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(24),
-              child: Image.network(
-                product.productColorList[colorIndex].imageUrl,
+              child: CachedNetworkImage(
+                imageUrl: product.productColorList[colorIndex].imageUrl,
                 width: double.infinity,
                 fit: BoxFit.cover,
               ),
