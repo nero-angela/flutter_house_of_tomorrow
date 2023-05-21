@@ -1,6 +1,9 @@
+import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:house_of_tomorrow/src/repository/product_repository.dart';
+import 'package:mockito/annotations.dart';
 
+@GenerateNiceMocks([MockSpec<Dio>()])
 void main() {
   late ProductRepository productRepository;
 
