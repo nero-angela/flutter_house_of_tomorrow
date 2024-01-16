@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:house_of_tomorrow/src/service/theme_service.dart';
 
-class AssetIcon extends StatelessWidget {
+class AssetIcon extends ConsumerWidget {
   const AssetIcon(
     this.icon, {
     super.key,
@@ -15,13 +16,13 @@ class AssetIcon extends StatelessWidget {
   final double? size;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return SvgPicture.asset(
       'assets/icons/$icon.svg',
       width: size,
       height: size,
       colorFilter: ColorFilter.mode(
-        color ?? context.color.text,
+        color ?? ref.color.text,
         BlendMode.srcIn,
       ),
     );

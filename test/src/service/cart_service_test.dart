@@ -1,3 +1,4 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:house_of_tomorrow/src/model/cart_item.dart';
 import 'package:house_of_tomorrow/src/service/cart_service.dart';
@@ -5,17 +6,28 @@ import 'package:house_of_tomorrow/src/service/cart_service.dart';
 import '../../dummy.dart';
 
 void main() {
+  late ProviderContainer container;
   late CartService cartService;
 
   setUp(() {
-    cartService = CartService();
+    container = ProviderContainer();
+    container.listen(
+      cartServiceProvider,
+      (previous, next) {},
+      fireImmediately: true,
+    );
+    cartService = container.read(cartServiceProvider.notifier);
+  });
+
+  tearDown(() {
+    container.dispose();
   });
 
   group('CartService', () {
     group('add()', () {
       test('신규 CartItem을 cartItemList에 추가한다.', () {
         cartService.add(Dummy.cartItem);
-        expect(cartService.cartItemList.length, 1);
+        expect(container.read(cartServiceProvider).length, 1);
       });
     });
 
@@ -38,7 +50,7 @@ void main() {
           count: 100,
         );
         cartService.update(0, newCartItem);
-        expect(cartService.cartItemList[0], newCartItem);
+        expect(container.read(cartServiceProvider)[0], newCartItem);
       });
     });
 
@@ -49,8 +61,8 @@ void main() {
         cartService.add(Dummy.cartItem.copyWith(isSelected: false));
         cartService.add(Dummy.cartItem.copyWith(isSelected: false));
         cartService.delete(cartService.selectedCartItemList);
-        expect(cartService.cartItemList.length, 2);
-        for (final cartItem in cartService.cartItemList) {
+        expect(container.read(cartServiceProvider).length, 2);
+        for (final cartItem in container.read(cartServiceProvider)) {
           expect(cartItem.isSelected, false);
         }
       });

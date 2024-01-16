@@ -9,7 +9,6 @@ import 'package:house_of_tomorrow/theme/component/cart_button.dart';
 import 'package:house_of_tomorrow/theme/component/color_picker.dart';
 import 'package:house_of_tomorrow/theme/component/pop_button.dart';
 import 'package:house_of_tomorrow/util/lang/generated/l10n.dart';
-import 'package:provider/provider.dart';
 
 import 'widget/product_bottom_sheet.dart';
 
@@ -24,11 +23,8 @@ class ProductView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseView(
-      viewModel: ProductViewModel(
-        product: product,
-        cartService: context.read(),
-      ),
-      builder: (context, viewModel) => Scaffold(
+      viewModelProvider: productViewModelProvider,
+      builder: (ref, viewModel, state) => Scaffold(
         appBar: AppBar(
           title: Text(S.current.product),
           leading: const PopButton(),
@@ -47,13 +43,13 @@ class ProductView extends StatelessWidget {
               children: [
                 /// ProductColorPreview
                 ProductColorPreview(
-                  colorIndex: viewModel.colorIndex,
+                  colorIndex: state.colorIndex,
                   product: product,
                 ),
 
                 /// ColorPicker
                 ColorPicker(
-                  colorIndex: viewModel.colorIndex,
+                  colorIndex: state.colorIndex,
                   colorList: product.productColorList.map((e) {
                     return e.color;
                   }).toList(),
@@ -68,10 +64,10 @@ class ProductView extends StatelessWidget {
 
           /// ProductBottomSheet
           productBottomSheet: ProductBottomSheet(
-            count: viewModel.count,
+            count: state.count,
             product: product,
             onCountChanged: viewModel.onCountChanged,
-            onAddToCartPressed: viewModel.onAddToCartPressed,
+            onAddToCartPressed: () => viewModel.onAddToCartPressed(product),
           ),
         ),
       ),

@@ -8,34 +8,32 @@ enum ButtonType {
 
   /// 텍스트 & 아이콘 색상
   Color getColor(
-    BuildContext context,
+    WidgetRef ref,
     bool isInactive, [
     Color? color,
   ]) {
     switch (this) {
       case ButtonType.fill:
         return isInactive
-            ? context.color.onInactiveContainer
-            : color ?? context.color.onPrimary;
+            ? ref.color.onInactiveContainer
+            : color ?? ref.color.onPrimary;
       case ButtonType.flat:
       case ButtonType.outline:
-        return isInactive
-            ? context.color.inactive
-            : color ?? context.color.primary;
+        return isInactive ? ref.color.inactive : color ?? ref.color.primary;
     }
   }
 
   /// 배경 색상
   Color getBackgroundColor(
-    BuildContext context,
+    WidgetRef ref,
     bool isInactive, [
     Color? color,
   ]) {
     switch (this) {
       case ButtonType.fill:
         return isInactive
-            ? context.color.inactiveContainer
-            : color ?? context.color.primary;
+            ? ref.color.inactiveContainer
+            : color ?? ref.color.primary;
       case ButtonType.flat:
       case ButtonType.outline:
         return color ?? Colors.transparent;
@@ -44,7 +42,7 @@ enum ButtonType {
 
   /// 테두리
   Border? getBorder(
-    BuildContext context,
+    WidgetRef ref,
     bool isInactive, [
     Color? color,
   ]) {
@@ -54,7 +52,7 @@ enum ButtonType {
         return null;
       case ButtonType.outline:
         return Border.all(
-          color: getColor(context, isInactive, color),
+          color: getColor(ref, isInactive, color),
         );
     }
   }

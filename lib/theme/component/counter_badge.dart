@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:house_of_tomorrow/src/service/theme_service.dart';
 
-class CounterBadge extends StatelessWidget {
+class CounterBadge extends ConsumerWidget {
   const CounterBadge({
     super.key,
     required this.child,
@@ -14,7 +15,7 @@ class CounterBadge extends StatelessWidget {
   final bool isShow;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Stack(
       alignment: Alignment.center,
       children: [
@@ -28,12 +29,12 @@ class CounterBadge extends StatelessWidget {
           child: IgnorePointer(
             ignoring: true,
             child: CircleAvatar(
-              backgroundColor: context.color.secondary,
+              backgroundColor: ref.color.secondary,
               radius: isShow ? 10 : 0,
               child: Text(
                 label,
-                style: context.typo.body2.copyWith(
-                  color: context.color.onSecondary,
+                style: ref.typo.body2.copyWith(
+                  color: ref.color.onSecondary,
                 ),
               ),
             ),

@@ -1,10 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:house_of_tomorrow/src/model/product.dart';
 import 'package:house_of_tomorrow/src/service/theme_service.dart';
 import 'package:house_of_tomorrow/util/helper/intl_helper.dart';
 
-class ProductColorPreview extends StatelessWidget {
+class ProductColorPreview extends ConsumerWidget {
   const ProductColorPreview({
     super.key,
     required this.colorIndex,
@@ -15,12 +16,12 @@ class ProductColorPreview extends StatelessWidget {
   final Product product;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Container(
       decoration: BoxDecoration(
-        color: context.color.surface,
+        color: ref.color.surface,
         borderRadius: BorderRadius.circular(24),
-        boxShadow: context.deco.shadow,
+        boxShadow: ref.deco.shadow,
       ),
       padding: const EdgeInsets.all(16),
       margin: const EdgeInsets.symmetric(horizontal: 32),
@@ -45,8 +46,8 @@ class ProductColorPreview extends StatelessWidget {
           /// Name
           Text(
             product.name.toString(),
-            style: context.typo.headline1.copyWith(
-              fontWeight: context.typo.semiBold,
+            style: ref.typo.headline1.copyWith(
+              fontWeight: ref.typo.semiBold,
             ),
           ),
           const SizedBox(height: 4),
@@ -55,9 +56,9 @@ class ProductColorPreview extends StatelessWidget {
               /// Brand
               Text(
                 product.brand.toString(),
-                style: context.typo.subtitle1.copyWith(
-                  fontWeight: context.typo.light,
-                  color: context.color.subtext,
+                style: ref.typo.subtitle1.copyWith(
+                  fontWeight: ref.typo.light,
+                  color: ref.color.subtext,
                 ),
               ),
 
@@ -69,8 +70,8 @@ class ProductColorPreview extends StatelessWidget {
                   symbol: product.priceUnit,
                   number: product.price,
                 ),
-                style: context.typo.headline6.copyWith(
-                  color: context.color.primary,
+                style: ref.typo.headline6.copyWith(
+                  color: ref.color.primary,
                 ),
               ),
             ],

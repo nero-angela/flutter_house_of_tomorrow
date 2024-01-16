@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:house_of_tomorrow/src/repository/product_repository.dart';
+import 'package:house_of_tomorrow/util/helper/network_helper.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
@@ -9,12 +11,25 @@ import 'product_repository_test.mocks.dart';
 
 @GenerateNiceMocks([MockSpec<Dio>()])
 void main() {
+  late ProviderContainer container;
   late MockDio dio;
   late ProductRepository productRepository;
 
   setUp(() {
     dio = MockDio();
-    productRepository = ProductRepository(dio: dio);
+    container = ProviderContainer(overrides: [
+      dioProvider.overrideWithValue(dio),
+    ]);
+    container.listen(
+      productRepositoryProvider,
+      (previous, next) {},
+      fireImmediately: true,
+    );
+    productRepository = container.read(productRepositoryProvider);
+  });
+
+  tearDown(() {
+    container.dispose();
   });
 
   group('ProductRepository', () {

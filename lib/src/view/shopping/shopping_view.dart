@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:house_of_tomorrow/src/view/base_view.dart';
 import 'package:house_of_tomorrow/src/view/shopping/shopping_view_model.dart';
 import 'package:house_of_tomorrow/src/view/shopping/widget/product_card_grid.dart';
@@ -9,31 +10,28 @@ import 'package:house_of_tomorrow/theme/component/cart_button.dart';
 import 'package:house_of_tomorrow/theme/component/hide_keyboard.dart';
 import 'package:house_of_tomorrow/theme/component/input_field.dart';
 import 'package:house_of_tomorrow/util/lang/generated/l10n.dart';
-import 'package:provider/provider.dart';
 
-class ShoppingView extends StatefulWidget {
+class ShoppingView extends ConsumerStatefulWidget {
   const ShoppingView({super.key});
 
   @override
-  State<ShoppingView> createState() => _ShoppingViewState();
+  ConsumerState<ShoppingView> createState() => _ShoppingViewState();
 }
 
-class _ShoppingViewState extends State<ShoppingView> {
-  late final ShoppingViewModel shoppingViewModel = ShoppingViewModel(
-    productRepository: context.read(),
-  );
-
+class _ShoppingViewState extends ConsumerState<ShoppingView> {
   @override
   void initState() {
     super.initState();
-    shoppingViewModel.searchProductList();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      ref.read(shoppingViewModelProvider.notifier).searchProductList();
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return BaseView(
-      viewModel: shoppingViewModel,
-      builder: (context, viewModel) => HideKeyboard(
+      viewModelProvider: shoppingViewModelProvider,
+      builder: (ref, viewModel, state) => HideKeyboard(
         child: Scaffold(
           appBar: AppBar(
             title: Text(S.current.shopping),
@@ -88,9 +86,9 @@ class _ShoppingViewState extends State<ShoppingView> {
 
               /// ProductCardList
               Expanded(
-                child: viewModel.productList.isEmpty
+                child: state.productList.isEmpty
                     ? const ProductEmpty()
-                    : ProductCardGrid(viewModel.productList),
+                    : ProductCardGrid(state.productList),
               ),
             ],
           ),

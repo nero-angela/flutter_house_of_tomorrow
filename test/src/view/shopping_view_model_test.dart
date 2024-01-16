@@ -1,3 +1,4 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:house_of_tomorrow/src/repository/product_repository.dart';
 import 'package:house_of_tomorrow/src/view/shopping/shopping_view_model.dart';
@@ -9,23 +10,34 @@ import 'shopping_view_model_test.mocks.dart';
 
 @GenerateNiceMocks([MockSpec<ProductRepository>()])
 void main() {
+  late ProviderContainer container;
   late MockProductRepository productRepository;
   late ShoppingViewModel shoppingViewModel;
 
   /// notifyListeners() 호출 횟수
   late int nNotify;
-  void notifyListener() => nNotify++;
 
   setUp(() {
     nNotify = 0;
     productRepository = MockProductRepository();
-    shoppingViewModel = ShoppingViewModel(
-      productRepository: productRepository,
-    )..addListener(notifyListener);
+
+    container = ProviderContainer(overrides: [
+      productRepositoryProvider.overrideWithValue(productRepository),
+    ]);
+    container.listen(
+      shoppingViewModelProvider,
+      (previous, next) {
+        if (previous != null) {
+          nNotify += 1;
+        }
+      },
+      fireImmediately: true,
+    );
+    shoppingViewModel = container.read(shoppingViewModelProvider.notifier);
   });
 
   tearDown(() {
-    shoppingViewModel.removeListener(notifyListener);
+    container.dispose();
   });
 
   group('ShoppingViewModel', () {
@@ -39,7 +51,7 @@ void main() {
 
         /// 호출 여부 확인
         verify(productRepository.searchProductList('')).called(1);
-        expect(shoppingViewModel.productList.length, 1);
+        expect(container.read(shoppingViewModelProvider).productList.length, 1);
         expect(nNotify, 2);
       });
     });

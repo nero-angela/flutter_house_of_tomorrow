@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:house_of_tomorrow/src/service/theme_service.dart';
 import 'package:house_of_tomorrow/theme/component/asset_icon.dart';
 
 part 'button_size.dart';
 part 'button_type.dart';
 
-class Button extends StatefulWidget {
+class Button extends ConsumerStatefulWidget {
   const Button({
     super.key,
     required this.onPressed,
@@ -45,10 +46,10 @@ class Button extends StatefulWidget {
   final Color? borderColor;
 
   @override
-  State<Button> createState() => _ButtonState();
+  ConsumerState<Button> createState() => _ButtonState();
 }
 
-class _ButtonState extends State<Button> {
+class _ButtonState extends ConsumerState<Button> {
   /// 버튼이 눌려있는지 여부
   bool isPressed = false;
 
@@ -57,21 +58,21 @@ class _ButtonState extends State<Button> {
 
   /// Text & Icon Color
   Color get color => widget.type.getColor(
-        context,
+        ref,
         isInactive,
         widget.color,
       );
 
   /// Background Color
   Color get backgroundColor => widget.type.getBackgroundColor(
-        context,
+        ref,
         isInactive,
         widget.backgroundColor,
       );
 
   /// Border
   Border? get border => widget.type.getBorder(
-        context,
+        ref,
         isInactive,
         widget.borderColor,
       );
@@ -126,9 +127,9 @@ class _ButtonState extends State<Button> {
             if (widget.text != null)
               Text(
                 widget.text!,
-                style: widget.size.getTextStyle(context).copyWith(
+                style: widget.size.getTextStyle(ref).copyWith(
                       color: color,
-                      fontWeight: context.typo.semiBold,
+                      fontWeight: ref.typo.semiBold,
                     ),
               ),
           ],

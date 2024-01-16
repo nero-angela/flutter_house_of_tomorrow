@@ -1,12 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:house_of_tomorrow/src/model/cart_item.dart';
 import 'package:house_of_tomorrow/src/service/theme_service.dart';
 import 'package:house_of_tomorrow/theme/component/asset_icon.dart';
 import 'package:house_of_tomorrow/theme/component/counter_button.dart';
 import 'package:house_of_tomorrow/util/helper/intl_helper.dart';
 
-class CartItemTile extends StatelessWidget {
+class CartItemTile extends ConsumerWidget {
   const CartItemTile({
     super.key,
     required this.cartItem,
@@ -19,7 +20,7 @@ class CartItemTile extends StatelessWidget {
   final void Function(int count) onCountChanged;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final productColor = cartItem.product.productColorList[cartItem.colorIndex];
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
@@ -38,7 +39,7 @@ class CartItemTile extends StatelessWidget {
                     width: 92,
                     height: 92,
                     fit: BoxFit.cover,
-                    color: context.color.background,
+                    color: ref.color.background,
                     colorBlendMode: BlendMode.darken,
                   ),
                 ),
@@ -47,8 +48,8 @@ class CartItemTile extends StatelessWidget {
                 AssetIcon(
                   cartItem.isSelected ? 'check' : 'uncheck',
                   color: cartItem.isSelected
-                      ? context.color.primary
-                      : context.color.inactive,
+                      ? ref.color.primary
+                      : ref.color.inactive,
                   size: 32,
                 ),
               ],
@@ -62,7 +63,7 @@ class CartItemTile extends StatelessWidget {
                   /// Name
                   Text(
                     cartItem.product.name.toString(),
-                    style: context.typo.headline5,
+                    style: ref.typo.headline5,
                   ),
 
                   const SizedBox(height: 12),
@@ -75,8 +76,8 @@ class CartItemTile extends StatelessWidget {
                           symbol: cartItem.product.priceUnit,
                           number: cartItem.product.price * cartItem.count,
                         ),
-                        style: context.typo.subtitle1.copyWith(
-                          color: context.color.subtext,
+                        style: ref.typo.subtitle1.copyWith(
+                          color: ref.color.subtext,
                         ),
                       ),
                       const Spacer(),

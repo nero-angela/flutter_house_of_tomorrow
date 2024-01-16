@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:house_of_tomorrow/src/service/theme_service.dart';
 
-class ColorPicker extends StatelessWidget {
+class ColorPicker extends ConsumerWidget {
   const ColorPicker({
     super.key,
     required this.colorIndex,
@@ -14,7 +15,7 @@ class ColorPicker extends StatelessWidget {
   final void Function(int index) onColorSelected;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Wrap(
       spacing: 16,
       alignment: WrapAlignment.center,
@@ -29,7 +30,7 @@ class ColorPicker extends StatelessWidget {
             decoration: BoxDecoration(
               border: isSelected
                   ? Border.all(
-                      color: context.color.primary,
+                      color: ref.color.primary,
                       width: 3,
                     )
                   : null,
@@ -38,7 +39,7 @@ class ColorPicker extends StatelessWidget {
             padding: EdgeInsets.all(isSelected ? 1 : 4),
             child: DecoratedBox(
               decoration: BoxDecoration(
-                boxShadow: context.deco.shadow,
+                boxShadow: ref.deco.shadow,
               ),
               child: CircleAvatar(
                 backgroundColor: color,

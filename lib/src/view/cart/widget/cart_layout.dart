@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:house_of_tomorrow/src/service/theme_service.dart';
 import 'package:house_of_tomorrow/theme/res/layout.dart';
 
-class CartLayout extends StatelessWidget {
+class CartLayout extends ConsumerWidget {
   const CartLayout({
     super.key,
     required this.cartItemList,
@@ -13,7 +14,7 @@ class CartLayout extends StatelessWidget {
   final Widget cartBottomSheet;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return context.layout(
       /// Mobile & Tablet
       Column(
@@ -37,8 +38,8 @@ class CartLayout extends StatelessWidget {
               child: Container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: context.color.surface,
-                  boxShadow: context.deco.shadow,
+                  color: ref.color.surface,
+                  boxShadow: ref.deco.shadow,
                   borderRadius: BorderRadius.circular(24),
                 ),
                 child: cartItemList,

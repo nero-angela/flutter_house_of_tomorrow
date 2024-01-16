@@ -1,26 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:house_of_tomorrow/src/model/product.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:house_of_tomorrow/src/repository/product_repository.dart';
 import 'package:house_of_tomorrow/src/view/base_view_model.dart';
+import 'package:house_of_tomorrow/src/view/shopping/shopping_view_state.dart';
 
-class ShoppingViewModel extends BaseViewModel {
-  ShoppingViewModel({
-    required this.productRepository,
-  });
+final shoppingViewModelProvider =
+    NotifierProvider.autoDispose<ShoppingViewModel, ShoppingViewState>(
+        ShoppingViewModel.new);
 
-  List<Product> productList = [];
+class ShoppingViewModel extends BaseViewModel<ShoppingViewState> {
+  @override
+  ShoppingViewState build() {
+    return const ShoppingViewState(
+      isBusy: false,
+      productList: [],
+    );
+  }
+
   final TextEditingController textController = TextEditingController();
-  final ProductRepository productRepository;
 
   String get keyword => textController.text.trim();
 
   Future<void> searchProductList() async {
-    isBusy = true;
+    state = state.copyWith(isBusy: true);
     final results = await Future.wait([
-      productRepository.searchProductList(keyword),
+      ref.read(productRepositoryProvider).searchProductList(keyword),
       Future.delayed(const Duration(milliseconds: 555)),
     ]);
-    productList = results[0];
-    isBusy = false;
+    state = state.copyWith(isBusy: false, productList: results[0]);
   }
 }
