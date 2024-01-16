@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:house_of_tomorrow/src/service/theme_service.dart';
 
-class BaseDialog extends StatelessWidget {
+class BaseDialog extends ConsumerWidget {
   const BaseDialog({
     super.key,
     this.title,
@@ -14,9 +15,9 @@ class BaseDialog extends StatelessWidget {
   final List<Widget>? actions;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,  WidgetRef ref) {
     return AlertDialog(
-      backgroundColor: context.color.surface,
+      backgroundColor: ref.color.surface,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
       ),
@@ -28,8 +29,8 @@ class BaseDialog extends StatelessWidget {
       title: title != null
           ? Text(
               title!,
-              style: context.typo.headline2.copyWith(
-                fontWeight: context.typo.semiBold,
+              style: ref.typo.headline2.copyWith(
+                fontWeight: ref.typo.semiBold,
               ),
             )
           : null,

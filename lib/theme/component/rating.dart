@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:house_of_tomorrow/src/service/theme_service.dart';
 import 'package:house_of_tomorrow/theme/component/asset_icon.dart';
 
-class Rating extends StatelessWidget {
+class Rating extends ConsumerWidget {
   const Rating({
     super.key,
     required this.rating,
@@ -11,21 +12,21 @@ class Rating extends StatelessWidget {
   final String rating;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
         AssetIcon(
           'star',
-          color: context.color.tertiary,
+          color: ref.color.tertiary,
           size: 20,
         ),
         const SizedBox(width: 6),
         Text(
           rating,
-          style: context.typo.body1.copyWith(
-            fontWeight: context.typo.light,
-            color: context.color.subtext,
+          style: ref.typo.body1.copyWith(
+            fontWeight: ref.typo.light,
+            color: ref.color.subtext,
           ),
         ),
       ],

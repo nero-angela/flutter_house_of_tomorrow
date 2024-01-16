@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:house_of_tomorrow/src/service/theme_service.dart';
 import 'package:house_of_tomorrow/theme/component/button/button.dart';
 
-class InputField extends StatefulWidget {
+class InputField extends ConsumerStatefulWidget {
   const InputField({
     super.key,
     this.hint,
@@ -19,10 +20,10 @@ class InputField extends StatefulWidget {
   final void Function()? onClear;
 
   @override
-  State<InputField> createState() => _InputFieldState();
+  ConsumerState<InputField> createState() => _InputFieldState();
 }
 
-class _InputFieldState extends State<InputField> {
+class _InputFieldState extends ConsumerState<InputField> {
   late final TextEditingController controller =
       widget.controller ?? TextEditingController();
 
@@ -41,12 +42,12 @@ class _InputFieldState extends State<InputField> {
       onSubmitted: widget.onSubmitted,
 
       /// 텍스트 스타일
-      style: context.typo.headline5.copyWith(
-        color: context.color.text,
+      style: ref.typo.headline5.copyWith(
+        color: ref.color.text,
       ),
 
       /// 커서 색상
-      cursorColor: context.color.primary,
+      cursorColor: ref.color.primary,
       decoration: InputDecoration(
         border: OutlineInputBorder(
           /// 테두리 삭제
@@ -61,12 +62,12 @@ class _InputFieldState extends State<InputField> {
 
         /// 배경 색상
         filled: true,
-        fillColor: context.color.hintContainer,
+        fillColor: ref.color.hintContainer,
 
         /// 힌트 스타일
-        hintStyle: context.typo.headline5.copyWith(
-          fontWeight: context.typo.light,
-          color: context.color.onHintContainer,
+        hintStyle: ref.typo.headline5.copyWith(
+          fontWeight: ref.typo.light,
+          color: ref.color.onHintContainer,
         ),
         hintText: widget.hint,
 

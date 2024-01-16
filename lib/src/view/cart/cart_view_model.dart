@@ -1,27 +1,25 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:house_of_tomorrow/src/model/cart_item.dart';
 import 'package:house_of_tomorrow/src/service/cart_service.dart';
 import 'package:house_of_tomorrow/src/view/base_view_model.dart';
+import 'package:house_of_tomorrow/src/view/cart/cart_view_state.dart';
 import 'package:house_of_tomorrow/theme/component/toast/toast.dart';
 import 'package:house_of_tomorrow/util/helper/intl_helper.dart';
 import 'package:house_of_tomorrow/util/lang/generated/l10n.dart';
 
-class CartViewModel extends BaseViewModel {
-  CartViewModel({
-    required this.cartService,
-  }) {
-    cartService.addListener(notifyListeners);
-  }
+final cartViewModelProvider =
+    NotifierProvider.autoDispose<CartViewModel, CartViewState>(
+        CartViewModel.new);
 
-  final CartService cartService;
-
+class CartViewModel extends BaseViewModel<CartViewState> {
   @override
-  void dispose() {
-    cartService.removeListener(notifyListeners);
-    super.dispose();
+  CartViewState build() {
+    return CartViewState(isBusy: false,
+    cartItemList: ref.watch(cartServiceProvider),
+    );
   }
 
-  /// 전체 CartItem
-  List<CartItem> get cartItemList => cartService.cartItemList;
+  CartService get cartService => ref.read(cartServiceProvider.notifier);
 
   /// 선택한 CartItem 목록
   List<CartItem> get selectedCartItemList => cartService.selectedCartItemList;
@@ -46,7 +44,7 @@ class CartViewModel extends BaseViewModel {
 
   /// CartItem 클릭
   void onCartItemPressed(int index) {
-    final cartItem = cartItemList[index];
+    final cartItem = state.cartItemList[index];
     cartService.update(
       index,
       cartItem.copyWith(
@@ -59,7 +57,7 @@ class CartViewModel extends BaseViewModel {
   void onCountChanged(int index, int count) {
     cartService.update(
       index,
-      cartItemList[index].copyWith(
+      state.cartItemList[index].copyWith(
         count: count,
       ),
     );

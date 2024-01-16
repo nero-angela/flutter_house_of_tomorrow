@@ -1,9 +1,10 @@
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-abstract class NetworkHelper {
-  static final Dio dio = Dio()
+final dioProvider = Provider<Dio>((ref) {
+  return Dio()
     ..interceptors.add(
       InterceptorsWrapper(
         onRequest: (options, handler) {
@@ -16,11 +17,11 @@ abstract class NetworkHelper {
           log('RES : [${response.statusCode}] ${response.requestOptions.path}');
           return handler.next(response);
         },
-        onError: (DioError e, handler) {
+        onError: (DioException e, handler) {
           // 에러시
           log('ERR : [${e.response?.statusCode}] ${e.requestOptions.path}');
           return handler.next(e);
         },
       ),
     );
-}
+});
