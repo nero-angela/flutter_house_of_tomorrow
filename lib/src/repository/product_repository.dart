@@ -2,13 +2,20 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:house_of_tomorrow/src/model/product.dart';
 import 'package:house_of_tomorrow/util/helper/network_helper.dart';
 
+final productRepositoryProvider = Provider<ProductRepository>(
+  (ref) => ProductRepository(
+    dio: ref.read(dioProvider),
+  ),
+);
+
 class ProductRepository {
   ProductRepository({
-    Dio? dio,
-  }) : dio = dio ?? NetworkHelper.dio;
+    required this.dio,
+  });
 
   final Dio dio;
   final String searchProductListUrl =

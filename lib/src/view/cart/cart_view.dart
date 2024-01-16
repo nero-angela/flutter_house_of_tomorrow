@@ -11,7 +11,6 @@ import 'package:house_of_tomorrow/src/view/cart/widget/cart_layout.dart';
 import 'package:house_of_tomorrow/theme/component/button/button.dart';
 import 'package:house_of_tomorrow/theme/component/pop_button.dart';
 import 'package:house_of_tomorrow/util/lang/generated/l10n.dart';
-import 'package:provider/provider.dart';
 
 class CartView extends StatelessWidget {
   const CartView({super.key});
@@ -19,10 +18,8 @@ class CartView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseView(
-      viewModel: CartViewModel(
-        cartService: context.read(),
-      ),
-      builder: (context, viewModel) => Scaffold(
+      viewModelProvider: cartViewModelProvider,
+      builder: (ref, viewModel, state) => Scaffold(
         appBar: AppBar(
           title: Text(S.current.cart),
           leading: const PopButton(),
@@ -43,19 +40,19 @@ class CartView extends StatelessWidget {
               },
               text: S.current.delete,
               type: ButtonType.flat,
-              color: context.color.secondary,
+              color: ref.color.secondary,
               isInactive: viewModel.selectedCartItemList.isEmpty,
             ),
           ],
         ),
         body: CartLayout(
           /// CartItemList
-          cartItemList: viewModel.cartItemList.isEmpty
+          cartItemList: state.cartItemList.isEmpty
               ? const CartEmpty()
               : ListView.builder(
-                  itemCount: viewModel.cartItemList.length,
+                  itemCount: state.cartItemList.length,
                   itemBuilder: (context, index) {
-                    final cartItem = viewModel.cartItemList[index];
+                    final cartItem = state.cartItemList[index];
                     return CartItemTile(
                       cartItem: cartItem,
                       onPressed: () {

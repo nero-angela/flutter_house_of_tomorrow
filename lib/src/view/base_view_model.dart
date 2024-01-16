@@ -1,13 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:house_of_tomorrow/src/view/base_view_state.dart';
 
-class BaseViewModel with ChangeNotifier {
-  bool _isBusy = false;
-
-  bool get isBusy => _isBusy;
-
-  set isBusy(bool isBusy) {
-    if (_isBusy == isBusy) return;
-    _isBusy = isBusy;
-    notifyListeners();
-  }
-}
+abstract class BaseViewModel<S extends BaseViewState> extends AutoDisposeNotifier<S> {}

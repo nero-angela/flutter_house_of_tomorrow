@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:house_of_tomorrow/src/service/theme_service.dart';
 
-class CircularIndicator extends StatelessWidget {
+class CircularIndicator extends ConsumerWidget {
   const CircularIndicator({
     super.key,
     required this.child,
@@ -12,7 +13,7 @@ class CircularIndicator extends StatelessWidget {
   final bool isBusy;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Stack(
       children: [
         child,
@@ -24,10 +25,10 @@ class CircularIndicator extends StatelessWidget {
             duration: const Duration(milliseconds: 222),
             opacity: isBusy ? 1 : 0,
             child: Container(
-              color: context.color.background,
+              color: ref.color.background,
               alignment: Alignment.center,
               child: CircularProgressIndicator(
-                color: context.color.primary,
+                color: ref.color.primary,
                 value: isBusy ? null : 0,
               ),
             ),

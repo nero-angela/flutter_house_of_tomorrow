@@ -1,48 +1,49 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:house_of_tomorrow/src/model/cart_item.dart';
 import 'package:house_of_tomorrow/src/model/product.dart';
 import 'package:house_of_tomorrow/src/service/cart_service.dart';
 import 'package:house_of_tomorrow/src/view/base_view_model.dart';
+import 'package:house_of_tomorrow/src/view/product/product_view_state.dart';
 import 'package:house_of_tomorrow/theme/component/toast/toast.dart';
 import 'package:house_of_tomorrow/util/lang/generated/l10n.dart';
 
-class ProductViewModel extends BaseViewModel {
-  ProductViewModel({
-    required this.cartService,
-    required this.product,
-  });
+final productViewModelProvider =
+    NotifierProvider.autoDispose<ProductViewModel, ProductViewState>(
+        ProductViewModel.new);
 
-  final CartService cartService;
-
-  /// 선택한 상품
-  final Product product;
-
-  /// 선택한 수량
-  int count = 1;
-
-  /// 선택한 색상
-  int colorIndex = 0;
+class ProductViewModel extends BaseViewModel<ProductViewState> {
+  @override
+  ProductViewState build() {
+    return const ProductViewState(
+      isBusy: false,
+      count: 1,
+      colorIndex: 0,
+    );
+  }
 
   /// 수량 업데이트 이벤트 함수
   void onCountChanged(int newCount) {
-    count = newCount;
-    notifyListeners();
+    state = state.copyWith(
+      count: newCount,
+    );
   }
 
   /// 색상 업데이트 이벤트 함수
   void onColorIndexChanged(int newColorIndex) {
-    colorIndex = newColorIndex;
-    notifyListeners();
+    state = state.copyWith(
+      colorIndex: newColorIndex,
+    );
   }
 
   /// 카트에 상품 추가
-  void onAddToCartPressed() {
+  void onAddToCartPressed(Product product) {
     final CartItem newCartItem = CartItem(
-      colorIndex: colorIndex,
-      count: count,
+      colorIndex: state.colorIndex,
+      count: state.count,
       isSelected: true,
       product: product,
     );
-    cartService.add(newCartItem);
+    ref.read(cartServiceProvider.notifier).add(newCartItem);
     Toast.show(S.current.productAdded(product.name));
   }
 }

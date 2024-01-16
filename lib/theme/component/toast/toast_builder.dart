@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:house_of_tomorrow/src/service/theme_service.dart';
 
-class ToastBuilder extends StatefulWidget {
+class ToastBuilder extends ConsumerStatefulWidget {
   const ToastBuilder({
     super.key,
     required this.text,
@@ -12,10 +13,10 @@ class ToastBuilder extends StatefulWidget {
   final Duration animDuration;
 
   @override
-  State<ToastBuilder> createState() => ToastBuilderState();
+  ConsumerState<ToastBuilder> createState() => ToastBuilderState();
 }
 
-class ToastBuilderState extends State<ToastBuilder> {
+class ToastBuilderState extends ConsumerState<ToastBuilder> {
   bool _isShow = false;
 
   bool get isShow => _isShow;
@@ -39,7 +40,7 @@ class ToastBuilderState extends State<ToastBuilder> {
           opacity: isShow ? 1 : 0,
           child: Container(
             decoration: BoxDecoration(
-              color: context.color.toastContainer,
+              color: ref.color.toastContainer,
               borderRadius: BorderRadius.circular(16),
             ),
             padding: const EdgeInsets.symmetric(
@@ -47,8 +48,8 @@ class ToastBuilderState extends State<ToastBuilder> {
               horizontal: 16,
             ),
             child: DefaultTextStyle(
-              style: context.typo.headline6.copyWith(
-                color: context.color.onToastContainer,
+              style: ref.typo.headline6.copyWith(
+                color: ref.color.onToastContainer,
               ),
               child: Text(widget.text),
             ),
