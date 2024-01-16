@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:house_of_tomorrow/src/service/theme_service.dart';
 import 'package:house_of_tomorrow/theme/component/base_dialog.dart';
 import 'package:house_of_tomorrow/theme/component/button/button.dart';
 import 'package:house_of_tomorrow/util/lang/generated/l10n.dart';
 
-class CartCheckoutDialog extends StatelessWidget {
+class CartCheckoutDialog extends ConsumerWidget {
   const CartCheckoutDialog({
     Key? key,
     required this.onCheckoutPressed,
@@ -13,20 +14,20 @@ class CartCheckoutDialog extends StatelessWidget {
   final void Function() onCheckoutPressed;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return BaseDialog(
       title: S.current.checkout,
       content: Text(
         S.current.checkoutDialogDesc,
-        style: context.typo.headline6,
+        style: ref.typo.headline6,
       ),
       actions: [
         /// Checkout
         Button(
           text: S.current.checkout,
           width: double.infinity,
-          color: context.color.onPrimary,
-          backgroundColor: context.color.primary,
+          color: ref.color.onPrimary,
+          backgroundColor: ref.color.primary,
           onPressed: () {
             Navigator.pop(context);
             onCheckoutPressed();
@@ -38,8 +39,8 @@ class CartCheckoutDialog extends StatelessWidget {
         Button(
           text: S.current.cancel,
           width: double.infinity,
-          color: context.color.text,
-          borderColor: context.color.hint,
+          color: ref.color.text,
+          borderColor: ref.color.hint,
           type: ButtonType.outline,
           onPressed: () {
             Navigator.pop(context);

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:house_of_tomorrow/src/service/theme_service.dart';
 
-class BaseBottomSheet extends StatelessWidget {
+class BaseBottomSheet extends ConsumerWidget {
   const BaseBottomSheet({
     super.key,
     required this.child,
@@ -14,17 +15,17 @@ class BaseBottomSheet extends StatelessWidget {
   final bool? isRoundAll;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Container(
       decoration: BoxDecoration(
-        color: context.color.surface,
+        color: ref.color.surface,
         borderRadius: isRoundAll ?? false
             ? BorderRadius.circular(24)
             : const BorderRadius.only(
                 topLeft: Radius.circular(24),
                 topRight: Radius.circular(24),
               ),
-        boxShadow: context.deco.shadow,
+        boxShadow: ref.deco.shadow,
       ),
       padding: padding ??
           const EdgeInsets.only(

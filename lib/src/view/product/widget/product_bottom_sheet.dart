@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:house_of_tomorrow/src/model/product.dart';
 import 'package:house_of_tomorrow/src/service/theme_service.dart';
 import 'package:house_of_tomorrow/theme/component/bottom_sheet/base_bottom_sheet.dart';
@@ -8,7 +9,7 @@ import 'package:house_of_tomorrow/theme/res/layout.dart';
 import 'package:house_of_tomorrow/util/helper/intl_helper.dart';
 import 'package:house_of_tomorrow/util/lang/generated/l10n.dart';
 
-class ProductBottomSheet extends StatelessWidget {
+class ProductBottomSheet extends ConsumerWidget {
   const ProductBottomSheet({
     super.key,
     required this.count,
@@ -23,7 +24,7 @@ class ProductBottomSheet extends StatelessWidget {
   final void Function() onAddToCartPressed;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return BaseBottomSheet(
       isRoundAll: context.layout(false, desktop: true),
       padding: EdgeInsets.only(
@@ -39,7 +40,7 @@ class ProductBottomSheet extends StatelessWidget {
             children: [
               Text(
                 S.current.quantity,
-                style: context.typo.headline3,
+                style: ref.typo.headline3,
               ),
               const Spacer(),
 
@@ -55,7 +56,7 @@ class ProductBottomSheet extends StatelessWidget {
             children: [
               Text(
                 S.current.totalPrice,
-                style: context.typo.headline3,
+                style: ref.typo.headline3,
               ),
               const Spacer(),
 
@@ -65,8 +66,8 @@ class ProductBottomSheet extends StatelessWidget {
                   symbol: product.priceUnit,
                   number: product.price * count,
                 ),
-                style: context.typo.headline3.copyWith(
-                  color: context.color.primary,
+                style: ref.typo.headline3.copyWith(
+                  color: ref.color.primary,
                 ),
               ),
             ],

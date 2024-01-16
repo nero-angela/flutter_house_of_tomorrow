@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:house_of_tomorrow/src/service/cart_service.dart';
-import 'package:house_of_tomorrow/src/service/theme_service.dart';
 import 'package:house_of_tomorrow/theme/component/cart_button.dart';
-import 'package:provider/provider.dart';
 
 import '../../dummy.dart';
 
@@ -19,14 +18,9 @@ void main() {
       /// Widget Build
       final cartService = CartService();
       await tester.pumpWidget(
-        MultiProvider(
-          providers: [
-            ChangeNotifierProvider(
-              create: (context) => ThemeService(),
-            ),
-            ChangeNotifierProvider(
-              create: (context) => cartService,
-            ),
+        ProviderScope(
+          overrides: [
+            cartServiceProvider.overrideWith(() => cartService),
           ],
           child: const MaterialApp(
             home: Center(child: CartButton()),
