@@ -1,7 +1,9 @@
+import 'package:equatable/equatable.dart';
+
 import 'lang.dart';
 import 'product_color.dart';
 
-class Product {
+class Product extends Equatable {
   final Lang name;
   final Lang brand;
   final Lang desc;
@@ -33,4 +35,15 @@ class Product {
       }).toList(),
     );
   }
+
+  @override
+  List<Object?> get props => [
+        name,
+        brand,
+        desc,
+        rating,
+        priceUnit,
+        price,
+        productColorList,
+      ];
 }

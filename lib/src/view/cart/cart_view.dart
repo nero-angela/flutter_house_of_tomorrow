@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:house_of_tomorrow/src/service/theme_service.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:house_of_tomorrow/src/service/theme/theme_service.dart';
 import 'package:house_of_tomorrow/src/view/base_view.dart';
 import 'package:house_of_tomorrow/src/view/cart/cart_view_model.dart';
 import 'package:house_of_tomorrow/src/view/cart/widget/cart_bottom_sheet.dart';
@@ -11,7 +12,6 @@ import 'package:house_of_tomorrow/src/view/cart/widget/cart_layout.dart';
 import 'package:house_of_tomorrow/theme/component/button/button.dart';
 import 'package:house_of_tomorrow/theme/component/pop_button.dart';
 import 'package:house_of_tomorrow/util/lang/generated/l10n.dart';
-import 'package:provider/provider.dart';
 
 class CartView extends StatelessWidget {
   const CartView({super.key});
@@ -36,7 +36,9 @@ class CartView extends StatelessWidget {
                   context: context,
                   builder: (context) {
                     return CartDeleteDialog(
-                      onDeletePressed: viewModel.onDeletePressed,
+                      onDeletePressed: () {
+                        viewModel.add(OnDeletePressed());
+                      },
                     );
                   },
                 );
@@ -44,25 +46,28 @@ class CartView extends StatelessWidget {
               text: S.current.delete,
               type: ButtonType.flat,
               color: context.color.secondary,
-              isInactive: viewModel.selectedCartItemList.isEmpty,
+              isInactive: viewModel.state.selectedCartItemList.isEmpty,
             ),
           ],
         ),
         body: CartLayout(
           /// CartItemList
-          cartItemList: viewModel.cartItemList.isEmpty
+          cartItemList: viewModel.state.cartItemList.isEmpty
               ? const CartEmpty()
               : ListView.builder(
-                  itemCount: viewModel.cartItemList.length,
+                  itemCount: viewModel.state.cartItemList.length,
                   itemBuilder: (context, index) {
-                    final cartItem = viewModel.cartItemList[index];
+                    final cartItem = viewModel.state.cartItemList[index];
                     return CartItemTile(
                       cartItem: cartItem,
                       onPressed: () {
-                        viewModel.onCartItemPressed(index);
+                        viewModel.add(OnCartItemPressed(index));
                       },
                       onCountChanged: (count) {
-                        viewModel.onCountChanged(index, count);
+                        viewModel.add(OnCountChanged(
+                          index: index,
+                          count: count,
+                        ));
                       },
                     );
                   },
@@ -70,15 +75,17 @@ class CartView extends StatelessWidget {
 
           /// CartBottomSheet
           cartBottomSheet: CartBottomSheet(
-            totalPrice: viewModel.totalPrice,
-            selectedCartItemList: viewModel.selectedCartItemList,
+            totalPrice: viewModel.state.totalPrice,
+            selectedCartItemList: viewModel.state.selectedCartItemList,
             onCheckoutPressed: () {
               /// Show checkout dialog
               showDialog(
                 context: context,
                 builder: (context) {
                   return CartCheckoutDialog(
-                    onCheckoutPressed: viewModel.onCheckoutPressed,
+                    onCheckoutPressed: () {
+                      viewModel.add(OnCheckoutPressed());
+                    },
                   );
                 },
               );

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:house_of_tomorrow/src/service/cart_service.dart';
-import 'package:house_of_tomorrow/src/service/theme_service.dart';
+import 'package:house_of_tomorrow/src/service/cart/cart_service.dart';
+import 'package:house_of_tomorrow/src/service/theme/theme_service.dart';
 import 'package:house_of_tomorrow/theme/component/cart_button.dart';
-import 'package:provider/provider.dart';
 
 import '../../dummy.dart';
 
@@ -19,12 +19,12 @@ void main() {
       /// Widget Build
       final cartService = CartService();
       await tester.pumpWidget(
-        MultiProvider(
+        MultiBlocProvider(
           providers: [
-            ChangeNotifierProvider(
+            BlocProvider(
               create: (context) => ThemeService(),
             ),
-            ChangeNotifierProvider(
+            BlocProvider(
               create: (context) => cartService,
             ),
           ],
@@ -35,8 +35,8 @@ void main() {
       );
 
       /// 카트에 추가
-      cartService.add(Dummy.cartItem);
-      cartService.add(Dummy.cartItem);
+      cartService.add(OnAddToCart(Dummy.cartItem));
+      cartService.add(OnAddToCart(Dummy.cartItem));
       await tester.pumpAndSettle();
 
       /// Badge 2 확인

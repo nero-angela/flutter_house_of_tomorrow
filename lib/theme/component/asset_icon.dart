@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:house_of_tomorrow/src/service/theme_service.dart';
+import 'package:house_of_tomorrow/src/service/theme/theme_service.dart';
 
 class AssetIcon extends StatelessWidget {
   const AssetIcon(
