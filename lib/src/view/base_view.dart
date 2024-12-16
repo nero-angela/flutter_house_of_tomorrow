@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:house_of_tomorrow/src/view/base_view_model.dart';
 import 'package:house_of_tomorrow/theme/component/circular_indicator.dart';
-import 'package:provider/provider.dart';
 
 class BaseView<T extends BaseViewModel> extends StatelessWidget {
   const BaseView({
@@ -15,12 +15,13 @@ class BaseView<T extends BaseViewModel> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
+    return BlocProvider(
       create: (context) => viewModel,
-      child: Consumer<T>(
-        builder: (context, viewModel, child) {
+      child: Builder(
+        builder: (context) {
+          final viewModel = context.watch<T>();
           return CircularIndicator(
-            isBusy: viewModel.isBusy,
+            isBusy: viewModel.state.isBusy,
             child: builder(context, viewModel),
           );
         },

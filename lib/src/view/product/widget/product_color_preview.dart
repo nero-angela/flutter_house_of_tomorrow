@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:house_of_tomorrow/src/model/product.dart';
-import 'package:house_of_tomorrow/src/service/theme_service.dart';
+import 'package:house_of_tomorrow/src/service/theme/theme_service.dart';
 import 'package:house_of_tomorrow/util/helper/intl_helper.dart';
 
 class ProductColorPreview extends StatelessWidget {
