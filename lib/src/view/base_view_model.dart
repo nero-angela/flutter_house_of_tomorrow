@@ -1,13 +1,6 @@
-import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:house_of_tomorrow/src/view/base_view_state.dart';
 
-class BaseViewModel with ChangeNotifier {
-  bool _isBusy = false;
-
-  bool get isBusy => _isBusy;
-
-  set isBusy(bool isBusy) {
-    if (_isBusy == isBusy) return;
-    _isBusy = isBusy;
-    notifyListeners();
-  }
+class BaseViewModel<E, S extends BaseViewState> extends Bloc<E, S> {
+  BaseViewModel(super.initialState);
 }

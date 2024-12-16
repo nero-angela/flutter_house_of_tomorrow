@@ -1,6 +1,8 @@
+import 'package:equatable/equatable.dart';
+
 import 'product.dart';
 
-class CartItem {
+class CartItem extends Equatable {
   /// 선택한 상품
   final Product product;
 
@@ -33,4 +35,7 @@ class CartItem {
       isSelected: isSelected ?? this.isSelected,
     );
   }
+
+  @override
+  List<Object?> get props => [product, colorIndex, count, isSelected];
 }

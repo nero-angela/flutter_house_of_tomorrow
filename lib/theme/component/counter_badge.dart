@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:house_of_tomorrow/src/service/theme_service.dart';
+import 'package:house_of_tomorrow/src/service/theme/theme_service.dart';
 
 class CounterBadge extends StatelessWidget {
   const CounterBadge({

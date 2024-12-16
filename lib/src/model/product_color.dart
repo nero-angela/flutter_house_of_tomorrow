@@ -1,6 +1,7 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
-class ProductColor {
+class ProductColor extends Equatable {
   final String imageUrl;
   final Color color;
 
@@ -15,4 +16,7 @@ class ProductColor {
       imageUrl: json['imageUrl'] ?? '',
     );
   }
+
+  @override
+  List<Object?> get props => [imageUrl, color];
 }

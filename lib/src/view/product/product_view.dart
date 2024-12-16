@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:house_of_tomorrow/src/model/product.dart';
 import 'package:house_of_tomorrow/src/view/base_view.dart';
 import 'package:house_of_tomorrow/src/view/product/product_view_model.dart';
@@ -9,7 +10,6 @@ import 'package:house_of_tomorrow/theme/component/cart_button.dart';
 import 'package:house_of_tomorrow/theme/component/color_picker.dart';
 import 'package:house_of_tomorrow/theme/component/pop_button.dart';
 import 'package:house_of_tomorrow/util/lang/generated/l10n.dart';
-import 'package:provider/provider.dart';
 
 import 'widget/product_bottom_sheet.dart';
 
@@ -47,17 +47,19 @@ class ProductView extends StatelessWidget {
               children: [
                 /// ProductColorPreview
                 ProductColorPreview(
-                  colorIndex: viewModel.colorIndex,
+                  colorIndex: viewModel.state.colorIndex,
                   product: product,
                 ),
 
                 /// ColorPicker
                 ColorPicker(
-                  colorIndex: viewModel.colorIndex,
+                  colorIndex: viewModel.state.colorIndex,
                   colorList: product.productColorList.map((e) {
                     return e.color;
                   }).toList(),
-                  onColorSelected: viewModel.onColorIndexChanged,
+                  onColorSelected: (index) {
+                    viewModel.add(OnColorIndexChanged(index));
+                  },
                 ),
 
                 /// ProductDesc
@@ -68,10 +70,14 @@ class ProductView extends StatelessWidget {
 
           /// ProductBottomSheet
           productBottomSheet: ProductBottomSheet(
-            count: viewModel.count,
+            count: viewModel.state.count,
             product: product,
-            onCountChanged: viewModel.onCountChanged,
-            onAddToCartPressed: viewModel.onAddToCartPressed,
+            onCountChanged: (count) {
+              viewModel.add(OnCountChanged(count));
+            },
+            onAddToCartPressed: () {
+              viewModel.add(OnAddToCartPressed());
+            },
           ),
         ),
       ),

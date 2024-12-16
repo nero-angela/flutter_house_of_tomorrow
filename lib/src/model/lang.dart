@@ -1,6 +1,7 @@
+import 'package:equatable/equatable.dart';
 import 'package:house_of_tomorrow/util/helper/intl_helper.dart';
 
-class Lang {
+class Lang extends Equatable {
   final String ko;
   final String en;
 
@@ -18,4 +19,10 @@ class Lang {
 
   @override
   String toString() => IntlHelper.isKo ? ko : en;
+
+  @override
+  List<Object?> get props => [
+        ko,
+        en,
+      ];
 }
