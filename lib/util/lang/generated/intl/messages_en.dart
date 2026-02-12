@@ -26,37 +26,41 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "addToCart": MessageLookupByLibrary.simpleMessage("Add to cart"),
-        "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
-        "cart": MessageLookupByLibrary.simpleMessage("Cart"),
-        "cartIsEmpty": MessageLookupByLibrary.simpleMessage(
-            "There is no items in the cart."),
-        "checkout": MessageLookupByLibrary.simpleMessage("Checkout"),
-        "checkoutDialogDesc": MessageLookupByLibrary.simpleMessage(
-            "Would you like to purchase the selected product?"),
-        "checkoutDialogSuccessToast":
-            MessageLookupByLibrary.simpleMessage("Purchased successfully."),
-        "dark": MessageLookupByLibrary.simpleMessage("Dark"),
-        "delete": MessageLookupByLibrary.simpleMessage("Delete"),
-        "deleteDialogDesc": MessageLookupByLibrary.simpleMessage(
-            "Do you want to delete the selected product?"),
-        "deleteDialogSuccessToast": MessageLookupByLibrary.simpleMessage(
-            "The selected items has been deleted."),
-        "description": MessageLookupByLibrary.simpleMessage("Description"),
-        "en": MessageLookupByLibrary.simpleMessage("English"),
-        "items": m0,
-        "ko": MessageLookupByLibrary.simpleMessage("Korean"),
-        "language": MessageLookupByLibrary.simpleMessage("Language"),
-        "light": MessageLookupByLibrary.simpleMessage("Light"),
-        "noProduct":
-            MessageLookupByLibrary.simpleMessage("There is no product."),
-        "product": MessageLookupByLibrary.simpleMessage("Product"),
-        "productAdded": m1,
-        "quantity": MessageLookupByLibrary.simpleMessage("Quantity"),
-        "searchProduct": MessageLookupByLibrary.simpleMessage("Search product"),
-        "selectedItems": MessageLookupByLibrary.simpleMessage("Selected Items"),
-        "shopping": MessageLookupByLibrary.simpleMessage("Shopping"),
-        "theme": MessageLookupByLibrary.simpleMessage("Theme"),
-        "totalPrice": MessageLookupByLibrary.simpleMessage("Total Price")
-      };
+    "addToCart": MessageLookupByLibrary.simpleMessage("Add to cart"),
+    "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
+    "cart": MessageLookupByLibrary.simpleMessage("Cart"),
+    "cartIsEmpty": MessageLookupByLibrary.simpleMessage(
+      "There is no items in the cart.",
+    ),
+    "checkout": MessageLookupByLibrary.simpleMessage("Checkout"),
+    "checkoutDialogDesc": MessageLookupByLibrary.simpleMessage(
+      "Would you like to purchase the selected product?",
+    ),
+    "checkoutDialogSuccessToast": MessageLookupByLibrary.simpleMessage(
+      "Purchased successfully.",
+    ),
+    "dark": MessageLookupByLibrary.simpleMessage("Dark"),
+    "delete": MessageLookupByLibrary.simpleMessage("Delete"),
+    "deleteDialogDesc": MessageLookupByLibrary.simpleMessage(
+      "Do you want to delete the selected product?",
+    ),
+    "deleteDialogSuccessToast": MessageLookupByLibrary.simpleMessage(
+      "The selected items has been deleted.",
+    ),
+    "description": MessageLookupByLibrary.simpleMessage("Description"),
+    "en": MessageLookupByLibrary.simpleMessage("English"),
+    "items": m0,
+    "ko": MessageLookupByLibrary.simpleMessage("Korean"),
+    "language": MessageLookupByLibrary.simpleMessage("Language"),
+    "light": MessageLookupByLibrary.simpleMessage("Light"),
+    "noProduct": MessageLookupByLibrary.simpleMessage("There is no product."),
+    "product": MessageLookupByLibrary.simpleMessage("Product"),
+    "productAdded": m1,
+    "quantity": MessageLookupByLibrary.simpleMessage("Quantity"),
+    "searchProduct": MessageLookupByLibrary.simpleMessage("Search product"),
+    "selectedItems": MessageLookupByLibrary.simpleMessage("Selected Items"),
+    "shopping": MessageLookupByLibrary.simpleMessage("Shopping"),
+    "theme": MessageLookupByLibrary.simpleMessage("Theme"),
+    "totalPrice": MessageLookupByLibrary.simpleMessage("Total Price"),
+  };
 }
